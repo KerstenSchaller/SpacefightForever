@@ -102,19 +102,19 @@ public partial class Player : CharacterBody2D
 
 		// Movement
 		this.Velocity = new();
-		if (Input.IsKeyPressed(Key.W)) //Up
+		if (Input.IsKeyPressed(Key.Up)) //Up
 		{
 			this.Velocity = new Vector2( this.Velocity.X, -speed);
 		}
-		if (Input.IsKeyPressed(Key.S)) //down
+		if (Input.IsKeyPressed(Key.Down)) //down
 		{
 			this.Velocity = new Vector2( this.Velocity.X, speed);
 		}
-		if (Input.IsKeyPressed(Key.A)) //left
+		if (Input.IsKeyPressed(Key.Left)) //left
 		{
 			this.Velocity = new Vector2( -speed, this.Velocity.Y);
 		}
-		if (Input.IsKeyPressed(Key.D)) //right
+		if (Input.IsKeyPressed(Key.Right)) //right
 		{
 			this.Velocity = new Vector2( speed, this.Velocity.Y);
 		}
