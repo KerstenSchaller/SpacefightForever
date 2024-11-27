@@ -73,9 +73,7 @@ public partial class Player : CharacterBody2D
 			// update shooting direction(with movement orthogonal to direction of shooting)
 			float movementInDirectionOrthogonal = displacement.Dot(shootingDirection.Rotated(-90).Normalized());
 			var angle = 0.5f*movementInDirectionOrthogonal*(Mathf.Pi/180);
-			GD.Print("move1: " + displacement + ":" + shootingDirection + "," + angle + "," + movementInDirectionOrthogonal);
 			shootingDirection = shootingDirection.Rotated(angle); 
-			GD.Print("move2: " + shootingDirection);
 
 
 		}
@@ -95,7 +93,6 @@ public partial class Player : CharacterBody2D
 	{
 		//shooting
 		updateShootingFoVandAngle();
-		GD.Print("FOV: " + shootingFOVDeg);
 		shootBullet();
 
 
