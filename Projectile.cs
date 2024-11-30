@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Bullet : CharacterBody2D
+public partial class Projectile : CharacterBody2D
 {
 	Vector2 direction;
 	float maxSpeed = 500;

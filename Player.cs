@@ -13,7 +13,7 @@ public partial class Player : CharacterBody2D
 		set => shootingFOVDeg = value;
 	}
 */
-	PackedScene bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
+	PackedScene bulletScene = GD.Load<PackedScene>("res://Projectile.tscn");
 
 	public Vector2 shootingDirection;
 	public float shootingFOVDeg;
@@ -43,7 +43,7 @@ public partial class Player : CharacterBody2D
 
 	private void shootBullet()
 	{
-		Bullet bullet = bulletScene.Instantiate<Bullet>();
+		Projectile bullet = bulletScene.Instantiate<Projectile>();
 		bullet.Position = this.Position;
 		bullet.setVelocity(getRandAngleinFOV());
 		GetTree().Root.AddChild(bullet);
