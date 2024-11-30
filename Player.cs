@@ -13,42 +13,31 @@ public partial class Player : CharacterBody2D
 		set => shootingFOVDeg = value;
 	}
 */
-	PackedScene bulletScene = GD.Load<PackedScene>("res://Projectile.tscn");
+
 
 	public Vector2 shootingDirection;
 	public float shootingFOVDeg;
 	private Vector2 lastPosition;
 
+	WeaponComponent weapon;
+
 	public override void _Ready()
 	{
+		weapon = GetNode<WeaponComponent>("WeaponComponent");
+
 		shootingDirection = new Vector2(0,-1);
 		lastPosition = this.Position;
 		shootingFOVDeg = 20;
+
+		weapon.ShootingFOVDegree = shootingFOVDeg;
+		weapon.ShootingDirection = shootingDirection;
 	}
 
 	int speed = 300;
 
-	private Vector2 getRandAngleinFOV()
-	{
-		
-		var fovRad = shootingFOVDeg*Mathf.Pi/180;
-		var shootingAngleDeg = Mathf.Atan2(shootingDirection.Y,shootingDirection.X);
-		var v1 = shootingAngleDeg - fovRad/2;
-		var v2 = shootingAngleDeg + fovRad/2;
-		var min = Mathf.Min(v1,v2);
-		var max = Mathf.Max(v1,v2);
-		float randomFloat = (float)(new Random().NextDouble() * (max - min) + min);
-		return new Vector2(Mathf.Cos(randomFloat),Mathf.Sin(randomFloat));
-	}
 
-	private void shootBullet()
-	{
-		Projectile bullet = bulletScene.Instantiate<Projectile>();
-		bullet.Position = this.Position;
-		bullet.setVelocity(getRandAngleinFOV());
-		GetTree().Root.AddChild(bullet);
-		
-	}
+
+
 
 
 	Vector2 originPos;
@@ -70,11 +59,14 @@ public partial class Player : CharacterBody2D
 			shootingFOVDeg += movementInDirection*0.5f;
 			shootingFOVDeg = Mathf.Clamp(shootingFOVDeg,2.5f,70);
 
+
 			// update shooting direction(with movement orthogonal to direction of shooting)
 			float movementInDirectionOrthogonal = displacement.Dot(shootingDirection.Rotated(-90).Normalized());
 			var angle = 0.5f*movementInDirectionOrthogonal*(Mathf.Pi/180);
 			shootingDirection = shootingDirection.Rotated(angle); 
 
+			weapon.ShootingFOVDegree = shootingFOVDeg;
+			weapon.ShootingDirection = shootingDirection;
 
 		}
 		lastPosition = this.Position;
@@ -93,7 +85,6 @@ public partial class Player : CharacterBody2D
 	{
 		//shooting
 		updateShootingFoVandAngle();
-		shootBullet();
 
 
 

@@ -32,9 +32,9 @@ public partial class FOVLine : Line2D
 	public override void _PhysicsProcess(double delta)
 	{
 
-		var parent = GetParent<Player>();
+		var parent = GetParent<WeaponComponent>();
 		Vector2 shootingDirection = parent.shootingDirection.Normalized();
-		float shootingFOV = parent.shootingFOVDeg/2*(Mathf.Pi/180);
+		float shootingFOV = parent.shootingFOVDegree/2*(Mathf.Pi/180);
 		if(Inverted)
 		{
 			shootingFOV = 2*Mathf.Pi-shootingFOV;
