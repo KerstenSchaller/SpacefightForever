@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvwonxx3t1qxk"]
+
+[ext_resource type="Texture2D" uid="uid://1cboldiig6dn" path="res://SpaceshipSurfaceTilemap.png" id="1_4cwpb"]
+[ext_resource type="Script" path="res://WaveFunctionCollapseComponent.cs" id="1_i5wia"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldfxe"]
+atlas = ExtResource("1_4cwpb")
+region = Rect2(0, 0, 8, 8)
+
+[node name="WaveFunctionCollapseComponent" type="Node2D"]
+script = ExtResource("1_i5wia")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ldfxe")

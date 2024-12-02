@@ -15,22 +15,17 @@ public partial class Player : CharacterBody2D
 */
 
 
-	public Vector2 shootingDirection;
-	public float shootingFOVDeg;
-	private Vector2 lastPosition;
 
-	WeaponComponent weapon;
+
+	OrbitWeaponHolder weapon;
 
 	public override void _Ready()
 	{
-		weapon = GetNode<WeaponComponent>("WeaponComponent");
+		weapon = GetNode<OrbitWeaponHolder>("OrbitWeaponHolder");
 
-		shootingDirection = new Vector2(0,-1);
-		lastPosition = this.Position;
-		shootingFOVDeg = 20;
 
-		weapon.ShootingFOVDegree = shootingFOVDeg;
-		weapon.ShootingDirection = shootingDirection;
+
+		//weapon.ShootingFOVDegree = shootingFOVDeg;
 	}
 
 	int speed = 300;
@@ -44,33 +39,7 @@ public partial class Player : CharacterBody2D
 	bool originSet = false;
 	int circleRadius = 0;
 	Vector2 circleCenter; 
-	private void updateShootingFoVandAngle()
-	{
-		if (Input.IsKeyPressed(Key.Ctrl)) 
-		{
 
-			//movement since last frame
-			Vector2 displacement = this.Position - lastPosition;
-
-			// update shooting FOV (with movement in direction of shooting)
-			float movementInDirection = displacement.Dot(shootingDirection.Normalized());
-			
-
-			shootingFOVDeg += movementInDirection*0.5f;
-			shootingFOVDeg = Mathf.Clamp(shootingFOVDeg,2.5f,70);
-
-
-			// update shooting direction(with movement orthogonal to direction of shooting)
-			float movementInDirectionOrthogonal = displacement.Dot(shootingDirection.Rotated(-90).Normalized());
-			var angle = 0.5f*movementInDirectionOrthogonal*(Mathf.Pi/180);
-			shootingDirection = shootingDirection.Rotated(angle); 
-
-			weapon.ShootingFOVDegree = shootingFOVDeg;
-			weapon.ShootingDirection = shootingDirection;
-
-		}
-		lastPosition = this.Position;
-	}
 
 	public override void _Draw()
 	{
@@ -83,11 +52,6 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		//shooting
-		updateShootingFoVandAngle();
-
-
-
 		// Movement
 		this.Velocity = new();
 		if (Input.IsKeyPressed(Key.Up)) //Up

@@ -12,7 +12,9 @@ public partial class Projectile : CharacterBody2D
 	public void setVelocity(Vector2 direction)
 	{
 		this.Velocity = direction.Normalized()*maxSpeed;
-		this.Rotate(Mathf.Atan2(direction.Y,direction.X)-Mathf.Pi/2);
+		this.Rotation = Mathf.Atan2(direction.Y,direction.X)+Mathf.Pi/2;
+		//Sprite2D sprite2D = GetNode<Sprite2D>("bulletSprite");
+		//sprite2D.Rotation = Mathf.Atan2(direction.Y,direction.X)+Mathf.Pi/2;
 	}
 
 

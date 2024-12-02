@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://xcqvd6nboeum"]
+
+[ext_resource type="Script" path="res://OrbitWeaponHolder.cs" id="1_ngtl4"]
+[ext_resource type="PackedScene" uid="uid://cjr2pn0gxh05l" path="res://WeaponComponent.tscn" id="1_sfihy"]
+[ext_resource type="Script" path="res://FOVLine.cs" id="2_qd1xu"]
+[ext_resource type="Texture2D" uid="uid://1cboldiig6dn" path="res://SpaceshipSurfaceTilemap.png" id="4_qqpfh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwone"]
+atlas = ExtResource("4_qqpfh")
+region = Rect2(0, 0, 8, 8)
+
+[node name="OrbitWeaponHolder" type="Node2D"]
+script = ExtResource("1_ngtl4")
+_Radius = 50.0
+_Color = Color(0.294118, 0.709804, 0.835294, 1)
+
+[node name="WeaponComponent" parent="." instance=ExtResource("1_sfihy")]
+position = Vector2(0, -50)
+
+[node name="FOVLine2" type="Line2D" parent="WeaponComponent"]
+points = PackedVector2Array(0, 0, 5.24537e-05, -300)
+width = 1.0
+default_color = Color(1, 0.52549, 0.921569, 1)
+script = ExtResource("2_qd1xu")
+Inverted = true
+
+[node name="FOVLine1" type="Line2D" parent="WeaponComponent"]
+points = PackedVector2Array(0, 0, 0, -300)
+width = 1.0
+default_color = Color(0.772549, 0.752941, 0.00784314, 1)
+script = ExtResource("2_qd1xu")
+
+[node name="Sprite2D" type="Sprite2D" parent="WeaponComponent"]
+scale = Vector2(0.109375, 0.101563)
+texture = SubResource("AtlasTexture_kwone")

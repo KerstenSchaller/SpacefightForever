@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://7jmb221jtoxr"]
+[gd_scene load_steps=6 format=3 uid="uid://7jmb221jtoxr"]
 
 [ext_resource type="PackedScene" uid="uid://dx5hgk5ergaru" path="res://Enemy.tscn" id="1_urf40"]
 [ext_resource type="PackedScene" uid="uid://bgca5qvondujy" path="res://Player.tscn" id="2_otln3"]
 [ext_resource type="Texture2D" uid="uid://8otmfvs68j4r" path="res://wallpapersden.com_artistic-pixel-art-hd-space_1920x1080.jpg" id="3_abvwr"]
+[ext_resource type="PackedScene" uid="uid://dvwonxx3t1qxk" path="res://WaveFunctionCollapseComponent.tscn" id="4_d5jqm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0x61p"]
 
@@ -24,3 +25,6 @@ position = Vector2(1386, 918)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-13, -157)
+zoom = Vector2(3, 3)
+
+[node name="WaveFunctionCollapseComponent" parent="." instance=ExtResource("4_d5jqm")]

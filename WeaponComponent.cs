@@ -3,24 +3,30 @@ using System;
 
 public partial class WeaponComponent : Node2D
 {
-	public Vector2 shootingDirection = new Vector2();
-	public float shootingFOVDegree = 0;
+	Vector2 shootingDirection = new Vector2(0,-1);
+	float shootingFOVDegree = 0;
+
+	
 	public Vector2 ShootingDirection
 	{
 		get { return shootingDirection; }
+		
 		set
 		{
 			shootingDirection = value;
-			GD.Print("set shootingDirection " + value );
+			//GD.Print("set shootingDirection " + value );
 		}
+		
 	}
+	
+
 	public float ShootingFOVDegree
 	{
 		get { return shootingFOVDegree; }
 		set
 		{
 			shootingFOVDegree = value;
-			GD.Print("set shootingFOVDegree " + value );
+			//GD.Print("set shootingFOVDegree " + value );
 		}
 	}
 
@@ -53,10 +59,10 @@ public partial class WeaponComponent : Node2D
 	private void shootBullet()
 	{
 		Projectile bullet = bulletScene.Instantiate<Projectile>();
-		bullet.Position = ToGlobal( new Vector2());
 		bullet.setVelocity(getRandAngleinFOV());
+		bullet.Position = ToGlobal(new Vector2());
 		
-
+		//AddChild(bullet);
 		GetTree().Root.AddChild(bullet);
 		
 	}
@@ -65,7 +71,8 @@ public partial class WeaponComponent : Node2D
 	{
 
 		var fovRad = shootingFOVDegree * Mathf.Pi / 180;
-		var shootingAngleDeg = Mathf.Atan2(shootingDirection.Y, shootingDirection.X);
+		//var shootingAngleDeg = Mathf.Atan2(shootingDirection.Y, shootingDirection.X);
+		var shootingAngleDeg = Rotation - Mathf.Pi/2;
 		var v1 = shootingAngleDeg - fovRad / 2;
 		var v2 = shootingAngleDeg + fovRad / 2;
 		var min = Mathf.Min(v1, v2);
