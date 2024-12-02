@@ -235,7 +235,7 @@ class WFCTile
 public partial class WaveFunctionCollapseComponent : Node2D
 {
 	//Texture2D atlasTexture = GD.Load<Texture2D>("SpaceshipSurfaceTilemap-export.png");
-	Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced3.png");
+	Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://2xTileset.png");
 
 	List<WFCTile> WFCTiles = new List<WFCTile>();
@@ -295,7 +295,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 
 
-	WFCTile getMatchingTile( int x, int y)
+	WFCTile getMatchingTile(int x, int y)
 	{
 		byte upTileId = new byte();
 		byte rightTileId = new byte();
@@ -307,10 +307,10 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		bool useUpTile = true;
 		bool useDownTile = true;
 
-		if(x > 0)
+		if (x > 0)
 		{
-			var leftTile = tileMap[y,x-1];
-			if(leftTile != null)
+			var leftTile = tileMap[y, x - 1];
+			if (leftTile != null)
 			{
 				leftTileId = leftTile.getIdSideRight().Data;
 			}
@@ -318,15 +318,16 @@ public partial class WaveFunctionCollapseComponent : Node2D
 			{
 				useLeftTile = false;
 			}
-			
-		}else{useLeftTile = false;}
-		if(x < tilemapSize-1)
+
+		}
+		else { useLeftTile = false; }
+		if (x < tilemapSize - 1)
 		{
-			var rightTile = tileMap[y,x+1];
+			var rightTile = tileMap[y, x + 1];
 
 
-			
-			if(rightTile != null)
+
+			if (rightTile != null)
 			{
 				rightTileId = rightTile.getIdSideLeft().Data;
 			}
@@ -334,12 +335,13 @@ public partial class WaveFunctionCollapseComponent : Node2D
 			{
 				useRightTile = false;
 			}
-	
-		}else{useRightTile = false;}
-		if(y > 0)
+
+		}
+		else { useRightTile = false; }
+		if (y > 0)
 		{
-			var upTile = tileMap[y-1,x];
-			if(upTile != null)
+			var upTile = tileMap[y - 1, x];
+			if (upTile != null)
 			{
 				upTileId = upTile.getIdSideDown().Data;
 			}
@@ -347,12 +349,13 @@ public partial class WaveFunctionCollapseComponent : Node2D
 			{
 				useUpTile = false;
 			}
-		}else{useUpTile = false;}
-		if(y < tilemapSize-1)
+		}
+		else { useUpTile = false; }
+		if (y < tilemapSize - 1)
 		{
-			var downTile = tileMap[y+1,x];
-			
-			if(downTile != null)
+			var downTile = tileMap[y + 1, x];
+
+			if (downTile != null)
 			{
 				downTileId = downTile.getIdSideUp().Data;
 			}
@@ -360,26 +363,22 @@ public partial class WaveFunctionCollapseComponent : Node2D
 			{
 				useDownTile = false;
 			}
-		}else{useDownTile = false;}
+		}
+		else { useDownTile = false; }
 
 
-		return getMatchingWFCTile(useLeftTile,useDownTile,useRightTile,useUpTile,leftTileId,downTileId,rightTileId,upTileId);
-	}
-
-	WFCTile getMatchingWFCTile(bool useLeft, bool useDown, bool useRight, bool useUp, byte leftId, byte downId, byte rightId, byte upId)
-	{
 		List<WFCTile> tiles = new List<WFCTile>();
-		foreach(var t in WFCTiles)
+		foreach (var t in WFCTiles)
 		{
-			if(useLeft && t.getIdSideLeft().compare(leftId) == false)continue;
-			if(useDown && t.getIdSideDown().compare(downId) == false)continue;
-			if(useRight && t.getIdSideRight().compare(rightId) == false)continue;
-			if(useUp && t.getIdSideUp().compare(upId) == false)continue;
+			if (useLeftTile && t.getIdSideLeft().compare(leftTileId) == false) continue;
+			if (useDownTile && t.getIdSideDown().compare(downTileId) == false) continue;
+			if (useRightTile && t.getIdSideRight().compare(rightTileId) == false) continue;
+			if (useUpTile && t.getIdSideUp().compare(upTileId) == false) continue;
 			tiles.Add(t);
 		}
 		int randomIndex = new Random().Next(tiles.Count);
 
-		if(tiles.Count == 0)
+		if (tiles.Count == 0)
 		{
 			GD.Print("Error, tiles count = 0... propably some combinations of sides are non existant in the tileset");
 		}
@@ -387,9 +386,9 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 		var retTile = tiles[randomIndex];
 		return retTile;
-
-
 	}
+
+
 
 
 
