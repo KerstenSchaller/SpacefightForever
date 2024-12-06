@@ -1,13 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://xcqvd6nboeum"]
+[gd_scene load_steps=5 format=3 uid="uid://xcqvd6nboeum"]
 
 [ext_resource type="Script" path="res://OrbitWeaponHolder.cs" id="1_ngtl4"]
 [ext_resource type="PackedScene" uid="uid://cjr2pn0gxh05l" path="res://WeaponComponent.tscn" id="1_sfihy"]
 [ext_resource type="Script" path="res://FOVLine.cs" id="2_qd1xu"]
-[ext_resource type="Texture2D" uid="uid://1cboldiig6dn" path="res://SpaceshipSurfaceTilemap.png" id="4_qqpfh"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kwone"]
-atlas = ExtResource("4_qqpfh")
-region = Rect2(0, 0, 8, 8)
+[ext_resource type="Texture2D" uid="uid://b5oogtlc7kuom" path="res://icon.svg" id="4_rndgg"]
 
 [node name="OrbitWeaponHolder" type="Node2D"]
 script = ExtResource("1_ngtl4")
@@ -32,4 +28,4 @@ script = ExtResource("2_qd1xu")
 
 [node name="Sprite2D" type="Sprite2D" parent="WeaponComponent"]
 scale = Vector2(0.109375, 0.101563)
-texture = SubResource("AtlasTexture_kwone")
+texture = ExtResource("4_rndgg")

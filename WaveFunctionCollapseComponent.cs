@@ -2,16 +2,19 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
 class Bitfield
 {
-	byte data;
+	UInt16 data;
+
+	public static int BitSize = 16;
 
 
-	public byte Data{get{return data;}}
+	public UInt16 Data{get{return data;}}
 
 	public bool compareBidirectional(Bitfield bitfieldToCompare)
 	{
@@ -19,26 +22,27 @@ class Bitfield
 		return (data == bitfieldToCompare.Data || ReversedData() == bitfieldToCompare.Data);
 	}
 
-	public bool compareBidirectional(byte dataToCompare)
+	public bool compareBidirectional(UInt16 dataToCompare)
 	{
 		// compare bitfields normally and with reversed bit order
 		return (data == dataToCompare || ReversedData() == dataToCompare);
 	}
 	
-	public bool compare(byte dataToCompare)
+	public bool compare(UInt16 dataToCompare)
 	{
 		// compare bitfields normally and with reversed bit order
 		return (data == dataToCompare);
 	}
 
-	public byte ReversedData()
+	public UInt16 ReversedData()
 	{
-		byte value = data;
-		byte result = 0;
-		for (int i = 0; i < 8; i++)
+		UInt16 value = data;
+		UInt16 result = 0;
+		
+		for (int i = 0; i < Bitfield.BitSize; i++)
 		{
 			result <<= 1;              		// Shift result to the left
-			result |= (byte)(value & 1); // Add the least significant bit of value
+			result |= (UInt16)(value & 1); // Add the least significant bit of value
 			value >>= 1;               // Shift value to the right
 		}
 		return result;
@@ -46,7 +50,7 @@ class Bitfield
 
 	public bool getBit(int position)
 	{
-		byte value = data;
+		UInt16 value = data;
 		return ((value >> position) & 1) > 0 ;
 	}
 
@@ -56,28 +60,36 @@ class Bitfield
 		if(value == 1)
 		{
 			// set bit
-			data |= (byte)(1 << position);
+			data |= (UInt16)(1 << position);
 		}
 		else
 		if(value == 0)
 		{
 			// clear bit
-			data &= (byte)~(1 << position);
+			data &= (UInt16)~(1 << position);
 		}
 		else{GD.Print("Invalid value for setBit(...)");}
 
-		if(data == 8 && position == 8)
-		{
-			GD.Print("error");
-		}
+
 
 	}
 
 
 	public string toString()
 	{
-		return Convert.ToString(data, 2).PadLeft(8, '0');
+		return Convert.ToString(data, 2).PadLeft((int)Bitfield.BitSize, '0');
 	}
+}
+
+struct Pixel
+{
+	byte B8;
+	byte G8;
+	byte R8;
+
+	public Pixel(byte _R8,byte _G8,byte _B8){R8 = _R8;G8=_G8;B8=_B8;}
+	public static bool operator ==(Pixel a, Pixel b){return a.R8 == b.R8 && a.G8 == b.G8 && a.B8 == b.B8;}
+	public static bool operator !=(Pixel a, Pixel b){return !(a == b);}
 }
 
 class WFCTile
@@ -106,11 +118,16 @@ class WFCTile
 	public enum OrientationType{Up,Down,Left,Right};
 	public OrientationType orientation = OrientationType.Up;
 
-
+/*
 	Bitfield sideUp = new Bitfield();
 	Bitfield sideRight = new Bitfield();
 	Bitfield sideDown = new Bitfield();
 	Bitfield sideLeft = new Bitfield();
+*/
+	List<Pixel> sideUp = new List<Pixel>();
+	List<Pixel> sideRight = new List<Pixel>();
+	List<Pixel> sideDown = new List<Pixel>();
+	List<Pixel> sideLeft = new List<Pixel>();
 
 
 	public void setOrientationTypeLeft(){orientation = OrientationType.Left;}
@@ -121,7 +138,7 @@ class WFCTile
 	int xIndex;
 	int yIndex;
 
-	public Bitfield getIdSideUp()
+	public List<Pixel> getSideUp()
 	{
 		switch(orientation)
 		{
@@ -134,10 +151,10 @@ class WFCTile
 			case OrientationType.Left:
 				return sideRight;
 		}
-		return new Bitfield();
+		return new List<Pixel>();
 	}
 
-	public Bitfield getIdSideRight()
+	public List<Pixel> getSideRight()
 	{
 		switch(orientation)
 		{
@@ -150,10 +167,10 @@ class WFCTile
 			case OrientationType.Left:
 				return sideDown;
 		}
-		return new Bitfield();
+		return new List<Pixel>();
 	}
 
-	public Bitfield getIdSideDown()
+	public List<Pixel> getSideDown()
 	{
 		switch(orientation)
 		{
@@ -166,12 +183,12 @@ class WFCTile
 			case OrientationType.Left:
 				return sideLeft;
 		}
-		return new Bitfield();
+		return new List<Pixel>();
 
 
 	}
 
-	public Bitfield getIdSideLeft()
+	public List<Pixel> getSideLeft()
 	{
 		switch(orientation)
 		{
@@ -184,11 +201,42 @@ class WFCTile
 			case OrientationType.Left:
 				return sideUp;
 		}
-		return new Bitfield();
+		return new List<Pixel>();
 	}
 
+	void ProcessImageBorder(byte[] imageData, int width, int height)
+	{
+		if (imageData == null || imageData.Length != width * height * 3)
+			throw new ArgumentException("Invalid pixel array or dimensions.");
 
+		// Top edge: Left to right
+		for (int x = 0; x < width; x++)
+		{
+			int index = x * 3; // Row 0, column x
+			sideUp.Add(new Pixel(imageData[index],imageData[index+1],imageData[index+2]));
+		}
 
+		// Right edge: Top to bottom
+		for (int y = 0; y < height; y++)
+		{
+			int index = (y * width + (width - 1)) * 3; // Row y, last column
+			sideRight.Add(new Pixel(imageData[index],imageData[index+1],imageData[index+2]));
+		}
+
+		// Bottom edge: Right to left
+		for (int x = width - 1; x >= 0; x--)
+		{
+			int index = ((height - 1) * width + x) * 3; // Last row, column x
+			sideDown.Add(new Pixel(imageData[index],imageData[index+1],imageData[index+2]));
+		}
+
+		// Left edge: Bottom to top
+		for (int y = height - 1; y >= 0; y--)
+		{
+			int index = (y * width) * 3; // Row y, first column
+			sideLeft.Add(new Pixel(imageData[index],imageData[index+1],imageData[index+2]));
+		}
+	}
 
 	public WFCTile(Texture2D texture, int _x, int _y)
 	{
@@ -199,33 +247,16 @@ class WFCTile
 		var imageData = texture.GetImage().GetData();
 		var imageDataSize = texture.GetSize();
 
-		Image referncePalette = new Image();
-		referncePalette.Load("2bit-demichrome-1x.png");
-		var refColor = referncePalette.GetPixel(2, 0);
 
-		
-		for (int i = 0; i < 8; i++)
-		{
-			// first row
-			bool condition1 = imageData[i*3] == refColor.R8 && imageData[i*3 + 1] == refColor.G8 && imageData[i*3 + 2] == refColor.B8;
-			if (condition1) { sideUp.setBit(i, 1); } else { sideUp.setBit(i, 0); }
 
-			// last column
-			bool condition2 = imageData[i*24 + 21] == refColor.R8 && imageData[i*24 + 22] == refColor.G8 && imageData[i*24 + 23] == refColor.B8;
-			if (condition2) { sideRight.setBit(i, 1); } else { sideRight.setBit(i, 0); }
+		var width = Bitfield.BitSize;
+		var height = Bitfield.BitSize;
 
-			// last row, end to start
-			bool condition3 = imageData[(7-i)*3+168] == refColor.R8 && imageData[(7-i)*3+169] == refColor.G8 && imageData[(7-i)*3+170] == refColor.B8;
-			if (condition3) { sideDown.setBit(i, 1); } else { sideDown.setBit(i, 0); }
-
-			// first column, bottom up
-			bool condition = imageData[(7-i)*24] == refColor.R8 && imageData[(7-i)*24 + 1] == refColor.G8 && imageData[(7-i)*24 + 2] == refColor.B8;
-			if (condition) { sideLeft.setBit(i, 1); } else { sideLeft.setBit(i, 0); }
-		}
+		ProcessImageBorder(imageData,width,height);
 		}
 		catch(Exception e)
 		{
-			GD.Print("error");
+			GD.Print("error2 " + e.ToString());
 		}
 	}
 }
@@ -235,7 +266,8 @@ class WFCTile
 public partial class WaveFunctionCollapseComponent : Node2D
 {
 	//Texture2D atlasTexture = GD.Load<Texture2D>("SpaceshipSurfaceTilemap-export.png");
-	Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced.png");
+	//Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced.png");
+	Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/FCWTilemap_Ink1X.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://2xTileset.png");
 
 	List<WFCTile> WFCTiles = new List<WFCTile>();
@@ -249,9 +281,9 @@ public partial class WaveFunctionCollapseComponent : Node2D
 	{
 		var atlasSize = atlasTexture.GetSize();
 		// loop throuth all textures in texture atlas
-		for(int y=0;y<atlasSize.Y/8;y++)
+		for(int y=0;y<atlasSize.Y/Bitfield.BitSize;y++)
 		{
-			for(int x=0;x<atlasSize.X/8;x++)
+			for(int x=0;x<atlasSize.X/Bitfield.BitSize;x++)
 			{
 				var texture = getTexture(x,y);
 				WFCTile wFCTile = new WFCTile(texture,x,y);
@@ -293,14 +325,21 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		await CreatePNG();
 	}
 
-
+	bool compareSide(List<Pixel> side1,List<Pixel> side2)
+	{
+		for(int i = 0;i<side1.Count;i++)
+		{
+			if(side1[i] != side2[i])return false;
+		}
+		return true;
+	}
 
 	WFCTile getMatchingTile(int x, int y)
 	{
-		byte upTileId = new byte();
-		byte rightTileId = new byte();
-		byte leftTileId = new byte();
-		byte downTileId = new byte();
+		List<Pixel> upTileId = new List<Pixel>();
+		List<Pixel> rightTileId = new List<Pixel>();
+		List<Pixel> leftTileId = new List<Pixel>();
+		List<Pixel> downTileId = new List<Pixel>();
 
 		bool useRightTile = true;
 		bool useLeftTile = true;
@@ -312,7 +351,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 			var leftTile = tileMap[y, x - 1];
 			if (leftTile != null)
 			{
-				leftTileId = leftTile.getIdSideRight().Data;
+				leftTileId = leftTile.getSideRight();
 			}
 			else
 			{
@@ -329,7 +368,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 			if (rightTile != null)
 			{
-				rightTileId = rightTile.getIdSideLeft().Data;
+				rightTileId = rightTile.getSideLeft();
 			}
 			else
 			{
@@ -343,7 +382,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 			var upTile = tileMap[y - 1, x];
 			if (upTile != null)
 			{
-				upTileId = upTile.getIdSideDown().Data;
+				upTileId = upTile.getSideDown();
 			}
 			else
 			{
@@ -357,7 +396,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 			if (downTile != null)
 			{
-				downTileId = downTile.getIdSideUp().Data;
+				downTileId = downTile.getSideUp();
 			}
 			else
 			{
@@ -370,10 +409,10 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		List<WFCTile> tiles = new List<WFCTile>();
 		foreach (var t in WFCTiles)
 		{
-			if (useLeftTile && t.getIdSideLeft().compare(leftTileId) == false) continue;
-			if (useDownTile && t.getIdSideDown().compare(downTileId) == false) continue;
-			if (useRightTile && t.getIdSideRight().compare(rightTileId) == false) continue;
-			if (useUpTile && t.getIdSideUp().compare(upTileId) == false) continue;
+			if (useLeftTile && compareSide(leftTileId, t.getSideLeft()) == false) continue;
+			if (useDownTile && compareSide(downTileId, t.getSideDown()) == false) continue;
+			if (useRightTile && compareSide(rightTileId, t.getSideRight()) == false) continue;
+			if (useUpTile && compareSide(upTileId, t.getSideUp()) == false) continue;
 			tiles.Add(t);
 		}
 		int randomIndex = new Random().Next(tiles.Count);
@@ -397,7 +436,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 		// Step 1: Create a viewport
 		var viewport = new SubViewport();
-		viewport.Size = new Vector2I(100*8, 100*8); // Set the size of the viewport
+		viewport.Size = new Vector2I(100*Bitfield.BitSize, 100*Bitfield.BitSize); // Set the size of the viewport
 		//viewport.Usage = Viewport.UsageEnum.Usage2d; // Set to 2D mode
 		viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
 	
@@ -414,7 +453,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 					// Step 2: Add a sprite to the viewport
 					var sprite = tileMap[y,x].getSprite();
 					
-					sprite.Position = new Vector2(x*8,y*8);
+					sprite.Position = new Vector2(x*Bitfield.BitSize,y*Bitfield.BitSize);
 					viewport.AddChild(sprite);
 
 				}
@@ -457,7 +496,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		return new AtlasTexture
 		{
 			Atlas = atlasTexture, // Assign the atlas
-			Region = new Rect2(8*xIndex, 8*yIndex, 8, 8) // Specify the region (x, y, width, height)
+			Region = new Rect2(Bitfield.BitSize*xIndex, Bitfield.BitSize*yIndex, Bitfield.BitSize, Bitfield.BitSize) // Specify the region (x, y, width, height)
 		};
 	}
 
