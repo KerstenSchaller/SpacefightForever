@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-[Tool]
 public partial class ParentSizedPoly2d : Polygon2D
 {
 	CollisionPolygon2D parent;

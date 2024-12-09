@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Dynamic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 
 
@@ -199,17 +199,19 @@ public partial class WaveFunctionCollapseComponent : Node2D
 	static int tilemapSize = 100;
 	static int BitSize = 8;
 
+	PNGCreator pNGCreator;
+
 	Texture2D outputTexture;
 	public Texture2D getOutputTexture()
 	{
-		return outputTexture;
+		return pNGCreator.getOutputTexture();
 	}
 
-
-
-
-	public override async void _Ready()
+	public override void _Ready()
 	{
+		pNGCreator = new PNGCreator();
+		AddChild(pNGCreator);
+
 		var atlasSize = atlasTexture.GetSize();
 		// loop throuth all textures in texture atlas
 		for(int y=0;y<atlasSize.Y/BitSize;y++)
@@ -252,8 +254,32 @@ public partial class WaveFunctionCollapseComponent : Node2D
 				tileMap[y,x] = matchingTile;
 			}
 		}
-		GD.Print("tilemap created");
-		await CreatePNG();
+	
+		// prepare sprites for drawing
+		List<Sprite2D> sprites = new List<Sprite2D>();
+		for (int y = 0; y < tilemapSize-2; y++)
+		{
+			for (int x = 0; x < tilemapSize - 2; x++)
+			{
+
+				// Step 2: Add a sprite to the viewport
+				var sprite = tileMap[y, x].getSprite();
+
+				sprite.Position = new Vector2(x * BitSize, y * BitSize);
+				sprites.Add(sprite);
+			}
+		}
+
+		
+		PNGCreator.Config config;
+		config.sizePixels = new Vector2I(100*BitSize, 100*BitSize);
+		config.savePath = "res://output_image.png";
+		config.sprites = sprites;
+
+		pNGCreator.config = config;
+		pNGCreator.run(config);
+
+
 	}
 
 	bool compareSide(List<Pixel> side1,List<Pixel> side2)
@@ -362,56 +388,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 
 
-	async Task CreatePNG()
-	{
 
-		// Step 1: Create a viewport
-		var viewport = new SubViewport();
-		viewport.Size = new Vector2I(100*BitSize, 100*BitSize); // Set the size of the viewport
-		//viewport.Usage = Viewport.UsageEnum.Usage2d; // Set to 2D mode
-		viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
-	
-		
-		// Add the viewport to the scene tree (required for rendering)
-		AddChild(viewport);
-
-		for (int y = 0; y < tilemapSize-2; y++)
-		{
-			for (int x = 0; x < tilemapSize-2; x++)
-			{
-				try
-				{
-					// Step 2: Add a sprite to the viewport
-					var sprite = tileMap[y,x].getSprite();
-					
-					sprite.Position = new Vector2(x*BitSize,y*BitSize);
-					viewport.AddChild(sprite);
-
-				}
-				catch(Exception e)
-				{
-					GD.Print("error3");
-				}
-
-			}
-		}
-		// Wait until the frame has finished before getting the texture.
-		await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-
-		// Step 3: Extract the rendered image
-		outputTexture = viewport.GetTexture();
-		var image = outputTexture.GetImage();
-		//image.FlipY(); // Flip the image vertically for correct orientation
-
-		// Step 4: Save the image as a PNG
-		string savePath = "res://output_image.png";
-		Error err = image.SavePng(savePath);
-
-		// Step 5: Clean up resources
-		viewport.QueueFree();
-
-
-	}
 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

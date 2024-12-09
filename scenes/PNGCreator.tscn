@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjr7an2n2rqo1"]
+
+[ext_resource type="Script" path="res://scripts/PNGCreator.cs" id="1_b76sk"]
+
+[node name="PNGCreator" type="Node"]
+script = ExtResource("1_b76sk")

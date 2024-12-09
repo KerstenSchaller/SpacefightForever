@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-[Tool]
 public partial class TexturedPolygon2D : Polygon2D
 {
 
@@ -11,9 +10,13 @@ public partial class TexturedPolygon2D : Polygon2D
 	[Export]
 	WaveFunctionCollapseComponent _WaveFunctionCollapseComponent {get;set;}
 
+	bool loaded = false;
+
+	
 
 	public override void _Process(double delta)
 	{
+		if(loaded == false)
 		{
 			load();
 		}
@@ -22,25 +25,22 @@ public partial class TexturedPolygon2D : Polygon2D
 
 	public override void _Ready()
 	{
-		load();
+		//load();
 	}
 
 	void load()
 	{
 		// Load and assign the texture
-		Texture = GD.Load<Texture2D>("res://output_image.png");
-		//var wfc = GetNode<WaveFunctionCollapseComponent>("WaveFunctionCollapseComponent");
-		//Texture = wfc.getOutputTexture();
+		var wfc = GetNode<WaveFunctionCollapseComponent>("WaveFunctionCollapseComponent");
+		Texture = wfc.getOutputTexture();
 		if(Texture != null)
 		{
-
 			// Set UV coordinates to map the polygon into the texture space
 			UV = GenerateUVCoordinates(Polygon, Texture);
 			_CollisionPolygon2D.Polygon = Polygon;
+			loaded = true;
 			QueueRedraw();
 		}
-		
-
 	}
 
 	public override void _Draw()
@@ -51,11 +51,11 @@ public partial class TexturedPolygon2D : Polygon2D
 		{
 			if(i < Polygon.Length - 1)
 			{
-				DrawLine(Polygon[i],Polygon[i+1], GameColor.Color0,3);
+				DrawLine(Polygon[i],Polygon[i+1], GameColor.Color2,3);
 			}
 			else
 			{
-				DrawLine(Polygon[0],Polygon[i], GameColor.Color0,3);
+				DrawLine(Polygon[0],Polygon[i], GameColor.Color2,3);
 			}
 
 		}

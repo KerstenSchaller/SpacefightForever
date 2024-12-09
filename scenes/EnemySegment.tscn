@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://baggpejjc0spg"]
 
 [ext_resource type="Script" path="res://scripts/EnemySegment.cs" id="1_qdr4g"]
-[ext_resource type="Texture2D" uid="uid://vbob12qo7hgd" path="res://output_image.png" id="2_nwb8n"]
+[ext_resource type="Texture2D" uid="uid://uwgkif0sc8no" path="res://output_image.png" id="2_nwb8n"]
 [ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="3_52dgn"]
 [ext_resource type="PackedScene" uid="uid://dvwonxx3t1qxk" path="res://scenes/WaveFunctionCollapseComponent.tscn" id="3_u5ssn"]
 
@@ -21,11 +21,6 @@ script = ExtResource("3_52dgn")
 _CollisionPolygon2D = NodePath("../CollisionPolygon2D")
 
 [node name="WaveFunctionCollapseComponent" parent="Polygon2D" instance=ExtResource("3_u5ssn")]
-position = Vector2(2, 55)
-rotation = 3.14159
-scale = Vector2(1, -1)
-
-[node name="WaveFunctionCollapseComponent" parent="." instance=ExtResource("3_u5ssn")]
 position = Vector2(2, 55)
 rotation = 3.14159
 scale = Vector2(1, -1)
