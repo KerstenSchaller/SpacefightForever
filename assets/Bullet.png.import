@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8otmfvs68j4r"
-path="res://.godot/imported/wallpapersden.com_artistic-pixel-art-hd-space_1920x1080.jpg-bede98e7d0e6fb37c6d811ba351ca972.ctex"
+uid="uid://dq1hn76efnhx4"
+path="res://.godot/imported/Bullet.png-2e9bba9af11ca82e859ae4493ba60850.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://wallpapersden.com_artistic-pixel-art-hd-space_1920x1080.jpg"
-dest_files=["res://.godot/imported/wallpapersden.com_artistic-pixel-art-hd-space_1920x1080.jpg-bede98e7d0e6fb37c6d811ba351ca972.ctex"]
+source_file="res://assets/Bullet.png"
+dest_files=["res://.godot/imported/Bullet.png-2e9bba9af11ca82e859ae4493ba60850.ctex"]
 
 [params]
 

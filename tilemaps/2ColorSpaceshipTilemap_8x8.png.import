@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx2i2tejf2ya6"
-path="res://.godot/imported/5x5_ExplosionSprite.png-1a976cfc4cd4049bd66100eb1ae84770.ctex"
+uid="uid://7ypjvwpeq8t"
+path="res://.godot/imported/2ColorSpaceshipTilemap_8x8.png-fbb724e56fc83a3aeb8255960db5b31d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://5x5_ExplosionSprite.png"
-dest_files=["res://.godot/imported/5x5_ExplosionSprite.png-1a976cfc4cd4049bd66100eb1ae84770.ctex"]
+source_file="res://tilemaps/2ColorSpaceshipTilemap_8x8.png"
+dest_files=["res://.godot/imported/2ColorSpaceshipTilemap_8x8.png-fbb724e56fc83a3aeb8255960db5b31d.ctex"]
 
 [params]
 

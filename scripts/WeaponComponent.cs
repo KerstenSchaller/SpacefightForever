@@ -33,7 +33,7 @@ public partial class WeaponComponent : Node2D
 	Random randComponent = new Random();
 	
 
-	PackedScene bulletScene = GD.Load<PackedScene>("res://Projectile.tscn");
+	PackedScene bulletScene = GD.Load<PackedScene>("res://scenes/Projectile.tscn");
 
 	public override void _Ready()
 	{

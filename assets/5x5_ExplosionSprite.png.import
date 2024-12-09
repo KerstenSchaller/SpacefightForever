@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caphpkn7uydoe"
-path="res://.godot/imported/2bit-demichrome-1x.png-1f5a05b24543c349e2bcccb27dbf7183.ctex"
+uid="uid://bx2i2tejf2ya6"
+path="res://.godot/imported/5x5_ExplosionSprite.png-44e7da7094cbf6c4fd660602bb7c5294.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2bit-demichrome-1x.png"
-dest_files=["res://.godot/imported/2bit-demichrome-1x.png-1f5a05b24543c349e2bcccb27dbf7183.ctex"]
+source_file="res://assets/5x5_ExplosionSprite.png"
+dest_files=["res://.godot/imported/5x5_ExplosionSprite.png-44e7da7094cbf6c4fd660602bb7c5294.ctex"]
 
 [params]
 

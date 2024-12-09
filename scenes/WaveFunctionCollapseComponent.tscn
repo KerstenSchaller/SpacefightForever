@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvwonxx3t1qxk"]
 
-[ext_resource type="Script" path="res://WaveFunctionCollapseComponent.cs" id="1_i5wia"]
+[ext_resource type="Script" path="res://scripts/WaveFunctionCollapseComponent.cs" id="1_i5wia"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldfxe"]
 region = Rect2(0, 0, 8, 8)

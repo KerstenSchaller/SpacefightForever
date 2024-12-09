@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq1hn76efnhx4"
-path="res://.godot/imported/Bullet.png-8556c7b1165e553b17f4d76e597a3ac5.ctex"
+uid="uid://dsyitri7418go"
+path="res://.godot/imported/simpleTilmap.png-ca32e670f051ab6b45ac7a234e18e2ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bullet.png"
-dest_files=["res://.godot/imported/Bullet.png-8556c7b1165e553b17f4d76e597a3ac5.ctex"]
+source_file="res://tilemaps/simpleTilmap.png"
+dest_files=["res://.godot/imported/simpleTilmap.png-ca32e670f051ab6b45ac7a234e18e2ec.ctex"]
 
 [params]
 

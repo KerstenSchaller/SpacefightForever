@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx5hgk5ergaru"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_vrtst"]
+[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="3_27vk8"]
+[ext_resource type="PackedScene" uid="uid://q7qsc0mokl1m" path="res://scenes/Weapon.tscn" id="3_dbt2c"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 12
+collision_mask = 12
+script = ExtResource("1_vrtst")
+
+[node name="EnemySegment2" parent="." instance=ExtResource("3_27vk8")]
+
+[node name="Weapon1" parent="." instance=ExtResource("3_dbt2c")]
+position = Vector2(184, -34)
+
+[node name="Weapon2" parent="." instance=ExtResource("3_dbt2c")]
+position = Vector2(-189, -33)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dewacd1r8o0j6"
-path="res://.godot/imported/SpaceshipSurfaceTilemapReduced.png-4483b4f1187768e1770f6c4b91a6775b.ctex"
+uid="uid://ccytd5mrq62su"
+path="res://.godot/imported/2bit-demichrome-1x.png-98ff10a863049fb6f940a5ebdc3a23e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SpaceshipSurfaceTilemapReduced.png"
-dest_files=["res://.godot/imported/SpaceshipSurfaceTilemapReduced.png-4483b4f1187768e1770f6c4b91a6775b.ctex"]
+source_file="res://palettes/2bit-demichrome-1x.png"
+dest_files=["res://.godot/imported/2bit-demichrome-1x.png-98ff10a863049fb6f940a5ebdc3a23e6.ctex"]
 
 [params]
 

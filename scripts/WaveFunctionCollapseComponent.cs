@@ -7,79 +7,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
-class Bitfield
-{
-	UInt16 data;
 
-	public static int BitSize = 16;
-
-
-	public UInt16 Data{get{return data;}}
-
-	public bool compareBidirectional(Bitfield bitfieldToCompare)
-	{
-		// compare bitfields normally and with reversed bit order
-		return (data == bitfieldToCompare.Data || ReversedData() == bitfieldToCompare.Data);
-	}
-
-	public bool compareBidirectional(UInt16 dataToCompare)
-	{
-		// compare bitfields normally and with reversed bit order
-		return (data == dataToCompare || ReversedData() == dataToCompare);
-	}
-	
-	public bool compare(UInt16 dataToCompare)
-	{
-		// compare bitfields normally and with reversed bit order
-		return (data == dataToCompare);
-	}
-
-	public UInt16 ReversedData()
-	{
-		UInt16 value = data;
-		UInt16 result = 0;
-		
-		for (int i = 0; i < Bitfield.BitSize; i++)
-		{
-			result <<= 1;              		// Shift result to the left
-			result |= (UInt16)(value & 1); // Add the least significant bit of value
-			value >>= 1;               // Shift value to the right
-		}
-		return result;
-	}
-
-	public bool getBit(int position)
-	{
-		UInt16 value = data;
-		return ((value >> position) & 1) > 0 ;
-	}
-
-	
-	public void setBit(int position, uint value)
-	{
-		if(value == 1)
-		{
-			// set bit
-			data |= (UInt16)(1 << position);
-		}
-		else
-		if(value == 0)
-		{
-			// clear bit
-			data &= (UInt16)~(1 << position);
-		}
-		else{GD.Print("Invalid value for setBit(...)");}
-
-
-
-	}
-
-
-	public string toString()
-	{
-		return Convert.ToString(data, 2).PadLeft((int)Bitfield.BitSize, '0');
-	}
-}
 
 struct Pixel
 {
@@ -118,12 +46,7 @@ class WFCTile
 	public enum OrientationType{Up,Down,Left,Right};
 	public OrientationType orientation = OrientationType.Up;
 
-/*
-	Bitfield sideUp = new Bitfield();
-	Bitfield sideRight = new Bitfield();
-	Bitfield sideDown = new Bitfield();
-	Bitfield sideLeft = new Bitfield();
-*/
+
 	List<Pixel> sideUp = new List<Pixel>();
 	List<Pixel> sideRight = new List<Pixel>();
 	List<Pixel> sideDown = new List<Pixel>();
@@ -249,8 +172,8 @@ class WFCTile
 
 
 
-		var width = Bitfield.BitSize;
-		var height = Bitfield.BitSize;
+		int width = (int)imageDataSize.X;
+		int height = (int)imageDataSize.Y;
 
 		ProcessImageBorder(imageData,width,height);
 		}
@@ -265,15 +188,23 @@ class WFCTile
 
 public partial class WaveFunctionCollapseComponent : Node2D
 {
-	//Texture2D atlasTexture = GD.Load<Texture2D>("SpaceshipSurfaceTilemap-export.png");
+	Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/2ColorSpaceshipTilemap_8x8.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced.png");
-	Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/FCWTilemap_Ink1X.png");
+	//Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/FCWTilemap_Ink1X.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://2xTileset.png");
 
 	List<WFCTile> WFCTiles = new List<WFCTile>();
 
-	static int tilemapSize = 100;
 	WFCTile[,] tileMap = new WFCTile[tilemapSize,tilemapSize]; 
+	static int tilemapSize = 100;
+	static int BitSize = 8;
+
+	Texture2D outputTexture;
+	public Texture2D getOutputTexture()
+	{
+		return outputTexture;
+	}
+
 
 
 
@@ -281,9 +212,9 @@ public partial class WaveFunctionCollapseComponent : Node2D
 	{
 		var atlasSize = atlasTexture.GetSize();
 		// loop throuth all textures in texture atlas
-		for(int y=0;y<atlasSize.Y/Bitfield.BitSize;y++)
+		for(int y=0;y<atlasSize.Y/BitSize;y++)
 		{
-			for(int x=0;x<atlasSize.X/Bitfield.BitSize;x++)
+			for(int x=0;x<atlasSize.X/BitSize;x++)
 			{
 				var texture = getTexture(x,y);
 				WFCTile wFCTile = new WFCTile(texture,x,y);
@@ -436,7 +367,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 		// Step 1: Create a viewport
 		var viewport = new SubViewport();
-		viewport.Size = new Vector2I(100*Bitfield.BitSize, 100*Bitfield.BitSize); // Set the size of the viewport
+		viewport.Size = new Vector2I(100*BitSize, 100*BitSize); // Set the size of the viewport
 		//viewport.Usage = Viewport.UsageEnum.Usage2d; // Set to 2D mode
 		viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
 	
@@ -453,7 +384,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 					// Step 2: Add a sprite to the viewport
 					var sprite = tileMap[y,x].getSprite();
 					
-					sprite.Position = new Vector2(x*Bitfield.BitSize,y*Bitfield.BitSize);
+					sprite.Position = new Vector2(x*BitSize,y*BitSize);
 					viewport.AddChild(sprite);
 
 				}
@@ -468,7 +399,8 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
 
 		// Step 3: Extract the rendered image
-		var image = viewport.GetTexture().GetImage();
+		outputTexture = viewport.GetTexture();
+		var image = outputTexture.GetImage();
 		//image.FlipY(); // Flip the image vertically for correct orientation
 
 		// Step 4: Save the image as a PNG
@@ -496,7 +428,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		return new AtlasTexture
 		{
 			Atlas = atlasTexture, // Assign the atlas
-			Region = new Rect2(Bitfield.BitSize*xIndex, Bitfield.BitSize*yIndex, Bitfield.BitSize, Bitfield.BitSize) // Specify the region (x, y, width, height)
+			Region = new Rect2(BitSize*xIndex, BitSize*yIndex, BitSize, BitSize) // Specify the region (x, y, width, height)
 		};
 	}
 
