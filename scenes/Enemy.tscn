@@ -1,18 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx5hgk5ergaru"]
+[gd_scene load_steps=5 format=3 uid="uid://dx5hgk5ergaru"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_vrtst"]
-[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="3_27vk8"]
 [ext_resource type="PackedScene" uid="uid://q7qsc0mokl1m" path="res://scenes/Weapon.tscn" id="3_dbt2c"]
+[ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="4_qayrv"]
+[ext_resource type="PackedScene" uid="uid://dvwonxx3t1qxk" path="res://scenes/WaveFunctionCollapseComponent.tscn" id="5_1sjn5"]
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 12
-collision_mask = 12
+collision_mask = 8
 script = ExtResource("1_vrtst")
 
-[node name="EnemySegment2" parent="." instance=ExtResource("3_27vk8")]
-
 [node name="Weapon1" parent="." instance=ExtResource("3_dbt2c")]
+visible = false
 position = Vector2(184, -34)
 
 [node name="Weapon2" parent="." instance=ExtResource("3_dbt2c")]
+visible = false
 position = Vector2(-189, -33)
+
+[node name="WaveFunctionCollapseComponent" parent="." instance=ExtResource("5_1sjn5")]
+position = Vector2(2, 55)
+scale = Vector2(1, -1)
+
+[node name="TexturedPoly" type="Node2D" parent="."]
+position = Vector2(-11, -20)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly"]
+position = Vector2(54, 94)
+
+[node name="TexturedPoly2" type="Node2D" parent="."]
+position = Vector2(151, -311)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly2"]
+position = Vector2(54, 94)
+
+[node name="TexturedPoly3" type="Node2D" parent="."]
+position = Vector2(-174, -307)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly3"]
+position = Vector2(54, 94)
+
+[node name="TexturedPoly4" type="Node2D" parent="."]
+position = Vector2(-175, -120)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly4"]
+position = Vector2(54, 94)
+
+[node name="TexturedPoly5" type="Node2D" parent="."]
+position = Vector2(150, -122)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly5"]
+position = Vector2(54, 94)
+
+[node name="TexturedPoly6" type="Node2D" parent="."]
+position = Vector2(-10, -402)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly6"]
+position = Vector2(54, 94)
+
+[node name="TexturedPoly7" type="Node2D" parent="."]
+position = Vector2(-10, -214)
+script = ExtResource("4_qayrv")
+UsePolyHelper = true
+NumberOfVertices = 6
+
+[node name="Node2D" type="Node2D" parent="TexturedPoly7"]
+position = Vector2(54, 94)

@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://baggpejjc0spg"]
+[gd_scene load_steps=2 format=3 uid="uid://baggpejjc0spg"]
 
 [ext_resource type="Script" path="res://scripts/EnemySegment.cs" id="1_qdr4g"]
-[ext_resource type="Texture2D" uid="uid://uwgkif0sc8no" path="res://output_image.png" id="2_nwb8n"]
-[ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="3_52dgn"]
-[ext_resource type="PackedScene" uid="uid://dvwonxx3t1qxk" path="res://scenes/WaveFunctionCollapseComponent.tscn" id="3_u5ssn"]
 
 [node name="EnemySegment" type="CharacterBody2D"]
 collision_layer = 12
@@ -11,16 +8,4 @@ collision_mask = 12
 script = ExtResource("1_qdr4g")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-42, 81, 0, 187, 70, 67, 614, -127, 140, -67, -138, -69, -502, -121)
-
-[node name="Polygon2D" type="Polygon2D" parent="." node_paths=PackedStringArray("_CollisionPolygon2D")]
-texture = ExtResource("2_nwb8n")
-polygon = PackedVector2Array(-42, 81, 0, 187, 70, 67, 614, -127, 140, -67, -138, -69, -502, -121)
-uv = PackedVector2Array(0.412186, 0.66242, 0.449821, 1, 0.512545, 0.617834, 1, 0, 0.575269, 0.191083, 0.326165, 0.184713, 0, 0.0191083)
-script = ExtResource("3_52dgn")
-_CollisionPolygon2D = NodePath("../CollisionPolygon2D")
-
-[node name="WaveFunctionCollapseComponent" parent="Polygon2D" instance=ExtResource("3_u5ssn")]
-position = Vector2(2, 55)
-rotation = 3.14159
-scale = Vector2(1, -1)
+polygon = PackedVector2Array(-136, 79, 0, 187, 142, 153, 219, 25, 151, -82, 8, -150, -143, -37)

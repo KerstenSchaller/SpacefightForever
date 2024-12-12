@@ -29,7 +29,7 @@ public partial class PNGCreator : Node2D
 		viewport.Size = config.sizePixels; // Set the size of the viewport
 		//viewport.Usage = Viewport.UsageEnum.Usage2d; // Set to 2D mode
 		viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
-	
+		viewport.CanvasItemDefaultTextureFilter = Viewport.DefaultCanvasItemTextureFilter.Linear;	
 		
 		// Add the viewport to the scene tree (required for rendering)
 		AddChild(viewport);
@@ -59,13 +59,14 @@ public partial class PNGCreator : Node2D
 		outputTexture = ImageTexture.CreateFromImage(image);
 
 		// Step 4: Save the image as a PNG
-		//Error err = image.SavePng(config.savePath);
+		Error err = image.SavePng(config.savePath);
 
 		// Step 5: Clean up resources
 		viewport.QueueFree();
+		GD.Print("creating wfc");
 	}
 
-	public void run(Config config)
+	public void run()
 	{
 		CreatePNG();
 	}

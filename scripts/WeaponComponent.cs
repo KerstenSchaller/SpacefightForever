@@ -50,7 +50,7 @@ public partial class WeaponComponent : Node2D
 		//if(cnt == 60)
 		{
 
-			shootBullet();
+			//shootBullet();
 			cnt=0;
 		}
 		cnt++;

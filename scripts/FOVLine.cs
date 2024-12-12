@@ -25,7 +25,7 @@ public partial class FOVLine : Line2D
 	public override void _Ready()
 	{
 		Width = 1;
-		DefaultColor = Colors.Yellow;
+		DefaultColor = GameColor.Color4;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

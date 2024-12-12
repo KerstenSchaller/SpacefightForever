@@ -46,20 +46,28 @@ public static class GameColor
         }
     }
 
+    public static Color Color4
+    {
+        get
+        {
+            if(initialized == false)init();
+            return color4;
+        }
+    }
+
     static void init()
     {
         /*
         Image image = Image.LoadFromFile("res://palettes/ink-1x.png");
-        color0 =  image.GetPixel(0,0);
-        color1 =  image.GetPixel(1,0);
-        color2 =  image.GetPixel(2,0);
-        color3 =  image.GetPixel(3,0);
+        color3 =  image.GetPixel(4,0);
+        GD.Print(color3);
         */
 
         color0 = new Color (0.12156863f, 0.12156863f, 0.16078432f, 1);
         color1 = new Color (0.25490198f, 0.22745098f, 0.25882354f, 1);
         color2 = new Color (0.34901962f, 0.3764706f, 0.4392157f, 1);
         color3 = new Color (0.5882353f, 0.63529414f, 0.7019608f, 1);
+        color4 = new Color (0.91764706f, 0.9411765f, 0.84705883f, 1);
         
         initialized = true;
     }

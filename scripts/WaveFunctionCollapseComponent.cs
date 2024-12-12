@@ -188,7 +188,7 @@ class WFCTile
 
 public partial class WaveFunctionCollapseComponent : Node2D
 {
-	Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/2ColorSpaceshipTilemap_8x8.png");
+	Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/2ColorSpaceshipTilemap_8x8_2.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/FCWTilemap_Ink1X.png");
 	//Texture2D atlasTexture = GD.Load<Texture2D>("res://2xTileset.png");
@@ -197,7 +197,7 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 	WFCTile[,] tileMap = new WFCTile[tilemapSize,tilemapSize]; 
 	static int tilemapSize = 100;
-	static int BitSize = 8;
+	static int BitSize = 16;
 
 	PNGCreator pNGCreator;
 
@@ -257,14 +257,11 @@ public partial class WaveFunctionCollapseComponent : Node2D
 	
 		// prepare sprites for drawing
 		List<Sprite2D> sprites = new List<Sprite2D>();
-		for (int y = 0; y < tilemapSize-2; y++)
+		for (int y = 0; y < tilemapSize; y++)
 		{
-			for (int x = 0; x < tilemapSize - 2; x++)
+			for (int x = 0; x < tilemapSize; x++)
 			{
-
-				// Step 2: Add a sprite to the viewport
 				var sprite = tileMap[y, x].getSprite();
-
 				sprite.Position = new Vector2(x * BitSize, y * BitSize);
 				sprites.Add(sprite);
 			}
@@ -272,12 +269,12 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 		
 		PNGCreator.Config config;
-		config.sizePixels = new Vector2I(100*BitSize, 100*BitSize);
+		config.sizePixels = new Vector2I((tilemapSize-2)*BitSize, (tilemapSize-2)*BitSize);
 		config.savePath = "res://output_image.png";
 		config.sprites = sprites;
 
 		pNGCreator.config = config;
-		pNGCreator.run(config);
+		pNGCreator.run();
 
 
 	}

@@ -1,14 +1,13 @@
 using Godot;
 using System;
 
-//[Tool]
+[Tool]
 public partial class OrbitWeaponHolder : Node2D
 {
 	[Export(PropertyHint.Range, "3,50,0.2")]
 	float _Radius{get;set;}
 
-	[Export]
-	Color _Color{get;set;}
+	Color _Color = GameColor.Color3;
 
 	Vector2 shootingDirection;
 	float shootingFOVDeg;
