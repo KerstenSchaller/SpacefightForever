@@ -15,6 +15,8 @@ run/main_scene="res://scenes/main2d.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+
+
 [display]
 
 window/size/viewport_width=1000

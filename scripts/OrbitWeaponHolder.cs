@@ -22,8 +22,10 @@ public partial class OrbitWeaponHolder : Node2D
 		lastGlobalPosition = ToGlobal(this.Position);
 		shootingFOVDeg = 20;
 
-		weaponComponent = GetNode<WeaponComponent>("WeaponComponent");
-
+		if (!Engine.IsEditorHint())
+		{
+			weaponComponent = GetNode<WeaponComponent>("WeaponComponent");
+		}
 	}
 
 	public override void _Process(double delta)
@@ -36,9 +38,12 @@ public partial class OrbitWeaponHolder : Node2D
 		updateShootingFoVandAngle();
 
 		//update weapon
-		weaponComponent.Position = _Radius*shootingDirection;
-		weaponComponent.Rotation = Mathf.Atan2(shootingDirection.Y,shootingDirection.X) + MathF.PI/2;
-		weaponComponent.ShootingFOVDegree = shootingFOVDeg;
+		if(weaponComponent != null)
+		{
+			weaponComponent.Position = _Radius*shootingDirection;
+			weaponComponent.Rotation = Mathf.Atan2(shootingDirection.Y,shootingDirection.X) + MathF.PI/2;
+			weaponComponent.ShootingFOVDegree = shootingFOVDeg;
+		}
 	}
 
 

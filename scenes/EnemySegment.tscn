@@ -1,11 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://baggpejjc0spg"]
 
-[ext_resource type="Script" path="res://scripts/EnemySegment.cs" id="1_qdr4g"]
+[ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="2_pvvh7"]
 
 [node name="EnemySegment" type="CharacterBody2D"]
 collision_layer = 12
-collision_mask = 12
-script = ExtResource("1_qdr4g")
+collision_mask = 8
+
+[node name="TexturedPoly" type="Node2D" parent="."]
+script = ExtResource("2_pvvh7")
+WFCPath = NodePath("")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-136, 79, 0, 187, 142, 153, 219, 25, 151, -82, 8, -150, -143, -37)
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)

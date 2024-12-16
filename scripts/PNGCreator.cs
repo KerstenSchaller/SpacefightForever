@@ -29,7 +29,7 @@ public partial class PNGCreator : Node2D
 		viewport.Size = config.sizePixels; // Set the size of the viewport
 		//viewport.Usage = Viewport.UsageEnum.Usage2d; // Set to 2D mode
 		viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
-		viewport.CanvasItemDefaultTextureFilter = Viewport.DefaultCanvasItemTextureFilter.Linear;	
+		viewport.CanvasItemDefaultTextureFilter = Viewport.DefaultCanvasItemTextureFilter.Nearest;	
 		
 		// Add the viewport to the scene tree (required for rendering)
 		AddChild(viewport);
@@ -38,7 +38,7 @@ public partial class PNGCreator : Node2D
 		{
 			try
 			{
-
+				sprite.TextureFilter = TextureFilterEnum.Nearest;
 				viewport.AddChild(sprite);
 
 			}

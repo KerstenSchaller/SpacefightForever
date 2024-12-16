@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_vrtst"]
 [ext_resource type="PackedScene" uid="uid://q7qsc0mokl1m" path="res://scenes/Weapon.tscn" id="3_dbt2c"]
-[ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="4_qayrv"]
+[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="4_rpq3m"]
 [ext_resource type="PackedScene" uid="uid://dvwonxx3t1qxk" path="res://scenes/WaveFunctionCollapseComponent.tscn" id="5_1sjn5"]
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 12
 collision_mask = 8
 script = ExtResource("1_vrtst")
+
+[node name="WaveFunctionCollapseComponent" parent="." instance=ExtResource("5_1sjn5")]
+position = Vector2(-4, -1)
+scale = Vector2(1, -1)
 
 [node name="Weapon1" parent="." instance=ExtResource("3_dbt2c")]
 visible = false
@@ -18,69 +22,83 @@ position = Vector2(184, -34)
 visible = false
 position = Vector2(-189, -33)
 
-[node name="WaveFunctionCollapseComponent" parent="." instance=ExtResource("5_1sjn5")]
-position = Vector2(2, 55)
-scale = Vector2(1, -1)
+[node name="EnemySegment" parent="." instance=ExtResource("4_rpq3m")]
+collision_mask = 12
 
-[node name="TexturedPoly" type="Node2D" parent="."]
-position = Vector2(-11, -20)
-script = ExtResource("4_qayrv")
+[node name="TexturedPoly" parent="EnemySegment" index="0" groups=["EnemyTex1"]]
+WFCPath = NodePath("../../WaveFunctionCollapseComponent")
 UsePolyHelper = true
 NumberOfVertices = 6
+SideLength = 120.0
 
-[node name="Node2D" type="Node2D" parent="TexturedPoly"]
-position = Vector2(54, 94)
+[node name="CollisionPolygon2D" parent="EnemySegment" index="1"]
+visible = false
+polygon = PackedVector2Array(60, 103.923, -60, 103.923, -120, -1.04907e-05, -60, -103.923, 60, -103.923, 120, -3.6239e-05)
 
-[node name="TexturedPoly2" type="Node2D" parent="."]
-position = Vector2(151, -311)
-script = ExtResource("4_qayrv")
+[node name="EnemySegment2" parent="." instance=ExtResource("4_rpq3m")]
+position = Vector2(145, -83)
+rotation = 1.0472
+collision_mask = 12
+
+[node name="TexturedPoly" parent="EnemySegment2" index="0" groups=["EnemyTex1"]]
+WFCPath = NodePath("../../WaveFunctionCollapseComponent")
 UsePolyHelper = true
-NumberOfVertices = 6
+NumberOfVertices = 4
+SideLength = 120.0
 
-[node name="Node2D" type="Node2D" parent="TexturedPoly2"]
-position = Vector2(54, 94)
+[node name="CollisionPolygon2D" parent="EnemySegment2" index="1"]
+visible = false
+position = Vector2(0, -1)
+polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
-[node name="TexturedPoly3" type="Node2D" parent="."]
-position = Vector2(-174, -307)
-script = ExtResource("4_qayrv")
+[node name="EnemySegment3" parent="." instance=ExtResource("4_rpq3m")]
+position = Vector2(-143, -82)
+rotation = 2.09439
+collision_mask = 12
+
+[node name="TexturedPoly" parent="EnemySegment3" index="0" groups=["EnemyTex1"]]
+WFCPath = NodePath("../../WaveFunctionCollapseComponent")
 UsePolyHelper = true
-NumberOfVertices = 6
+NumberOfVertices = 4
+SideLength = 120.0
 
-[node name="Node2D" type="Node2D" parent="TexturedPoly3"]
-position = Vector2(54, 94)
+[node name="CollisionPolygon2D" parent="EnemySegment3" index="1"]
+visible = false
+position = Vector2(0, -1)
+polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
-[node name="TexturedPoly4" type="Node2D" parent="."]
-position = Vector2(-175, -120)
-script = ExtResource("4_qayrv")
+[node name="EnemySegment4" parent="." instance=ExtResource("4_rpq3m")]
+position = Vector2(196, 1)
+rotation = 0.523599
+collision_mask = 12
+
+[node name="TexturedPoly" parent="EnemySegment4" index="0" groups=["EnemyTex1"]]
+WFCPath = NodePath("../../WaveFunctionCollapseComponent")
 UsePolyHelper = true
-NumberOfVertices = 6
+NumberOfVertices = 3
+SideLength = 120.0
 
-[node name="Node2D" type="Node2D" parent="TexturedPoly4"]
-position = Vector2(54, 94)
+[node name="CollisionPolygon2D" parent="EnemySegment4" index="1"]
+visible = false
+polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
-[node name="TexturedPoly5" type="Node2D" parent="."]
-position = Vector2(150, -122)
-script = ExtResource("4_qayrv")
+[node name="EnemySegment5" parent="." instance=ExtResource("4_rpq3m")]
+position = Vector2(-191, 3)
+rotation = 1.57429
+collision_mask = 12
+
+[node name="TexturedPoly" parent="EnemySegment5" index="0" groups=["EnemyTex1"]]
+WFCPath = NodePath("../../WaveFunctionCollapseComponent")
 UsePolyHelper = true
-NumberOfVertices = 6
+NumberOfVertices = 3
+SideLength = 120.0
 
-[node name="Node2D" type="Node2D" parent="TexturedPoly5"]
-position = Vector2(54, 94)
+[node name="CollisionPolygon2D" parent="EnemySegment5" index="1"]
+position = Vector2(0, -1)
+polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
-[node name="TexturedPoly6" type="Node2D" parent="."]
-position = Vector2(-10, -402)
-script = ExtResource("4_qayrv")
-UsePolyHelper = true
-NumberOfVertices = 6
-
-[node name="Node2D" type="Node2D" parent="TexturedPoly6"]
-position = Vector2(54, 94)
-
-[node name="TexturedPoly7" type="Node2D" parent="."]
-position = Vector2(-10, -214)
-script = ExtResource("4_qayrv")
-UsePolyHelper = true
-NumberOfVertices = 6
-
-[node name="Node2D" type="Node2D" parent="TexturedPoly7"]
-position = Vector2(54, 94)
+[editable path="EnemySegment"]
+[editable path="EnemySegment2"]
+[editable path="EnemySegment3"]
+[editable path="EnemySegment4"]
+[editable path="EnemySegment5"]

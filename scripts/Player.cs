@@ -52,6 +52,8 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		GameGlobal.PlayerPos = this.GlobalPosition;
+
 		// Movement
 		this.Velocity = new();
 		if (Input.IsKeyPressed(Key.Up)) //Up

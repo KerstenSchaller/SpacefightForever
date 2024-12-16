@@ -1,18 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgca5qvondujy"]
+[gd_scene load_steps=5 format=3 uid="uid://bgca5qvondujy"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_26r2p"]
 [ext_resource type="PackedScene" uid="uid://xcqvd6nboeum" path="res://scenes/OrbitWeaponHolder.tscn" id="3_h17xm"]
-[ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="4_aj3rn"]
+[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="3_oj6l7"]
+[ext_resource type="PackedScene" uid="uid://dvwonxx3t1qxk" path="res://scenes/WaveFunctionCollapseComponent.tscn" id="4_g2nsk"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_26r2p")
 
 [node name="OrbitWeaponHolder" parent="." instance=ExtResource("3_h17xm")]
 
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("4_aj3rn")
-UsePolyHelper = true
-NumberOfVertices = 9
+[node name="EnemySegment" parent="." instance=ExtResource("3_oj6l7")]
+position = Vector2(0, -1)
 
-[node name="Node2D" type="Node2D" parent="Node2D"]
-position = Vector2(35, -21)
+[node name="TexturedPoly" parent="EnemySegment" index="0"]
+WFCPath = NodePath("../../WaveFunctionCollapseComponent")
+UsePolyHelper = true
+NumberOfVertices = 8
+SideLength = 31.0
+
+[node name="CollisionPolygon2D" parent="EnemySegment" index="1"]
+polygon = PackedVector2Array(15.5, 37.4203, -15.5, 37.4203, -37.4203, 15.5, -37.4203, -15.5, -15.5, -37.4203, 15.5, -37.4203, 37.4203, -15.5, 37.4203, 15.5)
+
+[node name="WaveFunctionCollapseComponent" parent="." instance=ExtResource("4_g2nsk")]
+position = Vector2(-1, -1)
+
+[editable path="EnemySegment"]
