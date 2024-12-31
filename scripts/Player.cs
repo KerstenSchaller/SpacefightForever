@@ -72,7 +72,7 @@ public partial class Player : CharacterBody2D
 		{
 			this.Velocity = new Vector2( speed, this.Velocity.Y);
 		}
-		MoveAndSlide();
+		MoveAndCollide(this.Velocity*(float)delta);
 
 
 		QueueRedraw();

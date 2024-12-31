@@ -1,13 +1,6 @@
 using Godot;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Dynamic;
-using System.Linq;
-
-
-
 
 struct Pixel
 {
@@ -186,12 +179,11 @@ class WFCTile
 
 
 
-public partial class WaveFunctionCollapseComponent : Node2D
+public partial class WaveFunctionCollapseComponent : Node
 {
+	public static WaveFunctionCollapseComponent Instance { get; private set; }
+
 	Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/2ColorSpaceshipTilemap_8x8_2.png");
-	//Texture2D atlasTexture = GD.Load<Texture2D>("res://SpaceshipSurfaceTilemapReduced.png");
-	//Texture2D atlasTexture = GD.Load<Texture2D>("res://tilemaps/FCWTilemap_Ink1X.png");
-	//Texture2D atlasTexture = GD.Load<Texture2D>("res://2xTileset.png");
 
 	List<WFCTile> WFCTiles = new List<WFCTile>();
 
@@ -209,6 +201,9 @@ public partial class WaveFunctionCollapseComponent : Node2D
 
 	public override void _Ready()
 	{
+		// for singleton
+		Instance = this;
+
 		pNGCreator = new PNGCreator();
 		AddChild(pNGCreator);
 
@@ -381,21 +376,6 @@ public partial class WaveFunctionCollapseComponent : Node2D
 		return retTile;
 	}
 
-
-
-
-
-
-
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		//QueueRedraw();
-	}
-
-	
-	
 	AtlasTexture getTexture(int xIndex, int yIndex)
 	{
 		// Create a new AtlasTexture instance

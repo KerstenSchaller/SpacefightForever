@@ -9,8 +9,7 @@ public partial class TexturedPolygon2D : Node2D
 {
 	public WaveFunctionCollapseComponent _WaveFunctionCollapseComponent { get; set; }
 
-	[Export]
-	public NodePath WFCPath{get;set;}
+
 
 	[Export]
 	public Polygon2D polygon2D { get; set; }
@@ -84,14 +83,8 @@ public partial class TexturedPolygon2D : Node2D
 	public override void _Ready()
 	{
 		CollisionPoly = GetNode<CollisionPolygon2D>("../CollisionPolygon2D");
-		if(WFCPath != "")
-		{
-			_WaveFunctionCollapseComponent = GetNode<WaveFunctionCollapseComponent>(WFCPath);
-		}
-		else
-		{
-			GD.PrintErr("WFCPath not set");
-		}
+
+		_WaveFunctionCollapseComponent = WaveFunctionCollapseComponent.Instance;
 	}
 
 	void load()

@@ -63,7 +63,6 @@ public partial class PNGCreator : Node2D
 
 		// Step 5: Clean up resources
 		viewport.QueueFree();
-		GD.Print("creating wfc");
 	}
 
 	public void run()

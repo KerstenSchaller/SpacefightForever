@@ -9,7 +9,7 @@ public partial class OrbitWeaponHolder : Node2D
 
 	Color _Color = GameColor.Color3;
 
-	Vector2 shootingDirection;
+	public Vector2 shootingDirection;
 	float shootingFOVDeg;
 	private Vector2 lastGlobalPosition;
 

@@ -12,20 +12,23 @@ _Radius = 50.0
 [node name="WeaponComponent" parent="." instance=ExtResource("1_sfihy")]
 position = Vector2(0, -50)
 
-[node name="FOVLine2" type="Line2D" parent="WeaponComponent"]
+[node name="Sprite2D" type="Sprite2D" parent="WeaponComponent"]
+position = Vector2(0, -10)
+scale = Vector2(0.5, 0.468)
+texture = ExtResource("4_2l6tf")
+
+[node name="SpawnPoint" type="Node2D" parent="WeaponComponent"]
+position = Vector2(0, -9)
+
+[node name="FOVLine2" type="Line2D" parent="WeaponComponent/SpawnPoint"]
 points = PackedVector2Array(0, 0, 5.24537e-05, -300)
 width = 1.0
 default_color = Color(1, 0.52549, 0.921569, 1)
 script = ExtResource("2_qd1xu")
 Inverted = true
 
-[node name="FOVLine1" type="Line2D" parent="WeaponComponent"]
+[node name="FOVLine1" type="Line2D" parent="WeaponComponent/SpawnPoint"]
 points = PackedVector2Array(0, 0, 0, -300)
 width = 1.0
 default_color = Color(0.772549, 0.752941, 0.00784314, 1)
 script = ExtResource("2_qd1xu")
-
-[node name="Sprite2D" type="Sprite2D" parent="WeaponComponent"]
-position = Vector2(0, -2)
-scale = Vector2(0.109375, 0.101563)
-texture = ExtResource("4_2l6tf")

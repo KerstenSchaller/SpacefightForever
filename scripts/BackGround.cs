@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 
 public partial class BackGround : Node2D
 {
+	[Export]
+	bool Enabled {get;set;}
 	Texture2D atlas;
 	PNGCreator pNGCreator;
 	bool loaded;
@@ -107,6 +109,7 @@ public partial class BackGround : Node2D
 
 	public override void _Process(double delta)
 	{
+		if(!Enabled)return;
 		if(loaded == false)
 		{
 			var tex = pNGCreator.getOutputTexture();

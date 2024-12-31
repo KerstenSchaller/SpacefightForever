@@ -5,6 +5,7 @@ public partial class WeaponComponent : Node2D
 {
 	Vector2 shootingDirection = new Vector2(0,-1);
 	float shootingFOVDegree = 0;
+	Node2D spawnPoint;
 
 	
 	public Vector2 ShootingDirection
@@ -37,6 +38,7 @@ public partial class WeaponComponent : Node2D
 
 	public override void _Ready()
 	{
+		spawnPoint = GetNode<Node2D>("SpawnPoint");
 	}
 
 	public override void _Process(double delta)
@@ -60,7 +62,7 @@ public partial class WeaponComponent : Node2D
 	{
 		Projectile bullet = bulletScene.Instantiate<Projectile>();
 		bullet.setVelocity(getRandAngleinFOV());
-		bullet.Position = ToGlobal(new Vector2());
+		bullet.Position = ToGlobal(spawnPoint.Position);
 		
 		//AddChild(bullet);
 		GetTree().Root.AddChild(bullet);

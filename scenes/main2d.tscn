@@ -18,16 +18,15 @@ sources/0 = SubResource("TileSetAtlasSource_dw6gd")
 position = Vector2(4, 8)
 
 [node name="BackGround" parent="." instance=ExtResource("3_fyi4q")]
+Enabled = true
 
 [node name="Enemy" parent="." instance=ExtResource("2_f428f")]
 position = Vector2(1413, 637)
 
 [node name="Player" parent="." instance=ExtResource("3_nmuai")]
-position = Vector2(1630, 1049)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -71)
+position = Vector2(2018, 407)
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource("TileSet_p8vdg")
 format = 2

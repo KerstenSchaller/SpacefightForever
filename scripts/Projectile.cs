@@ -9,12 +9,12 @@ public partial class Projectile : CharacterBody2D
 	int aliveCounter = 0;
 	int maxLifeTicks = 3*60;
 
+	float damage = 5;
+
 	public void setVelocity(Vector2 direction)
 	{
 		this.Velocity = direction.Normalized()*maxSpeed;
 		this.Rotation = Mathf.Atan2(direction.Y,direction.X)+Mathf.Pi/2;
-		//Sprite2D sprite2D = GetNode<Sprite2D>("bulletSprite");
-		//sprite2D.Rotation = Mathf.Atan2(direction.Y,direction.X)+Mathf.Pi/2;
 	}
 
 
@@ -33,12 +33,21 @@ public partial class Projectile : CharacterBody2D
 				var bulletSprite = GetNode<Sprite2D>("bulletSprite");
 				var explosionSprite = GetNode<Sprite2D>("5x5ExplosionSprite");
 
+				// trigger explosion sprite
 				bulletSprite.Visible = false;
 				explosionSprite.Visible = true;
 				aliveCounter = maxLifeTicks - 10;
+
+				// damage enemys
+				var collider = (CharacterBody2D)collision.GetCollider();
+				if(collider.IsInGroup("enemy"))
+				{
+					((EnemySegment)collider).takeDamage(damage);
+				}
 			}
 		}
 		
+		// die after max ticks
 		if(aliveCounter >= maxLifeTicks)
 		{
 			this.QueueFree();
