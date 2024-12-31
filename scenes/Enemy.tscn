@@ -1,48 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx5hgk5ergaru"]
+[gd_scene load_steps=3 format=3 uid="uid://dx5hgk5ergaru"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_vrtst"]
-[ext_resource type="PackedScene" uid="uid://da2p8462s2jy7" path="res://scenes/Segment1.tscn" id="4_brgrn"]
 [ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="4_rpq3m"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(1, 0)
 collision_layer = 12
 collision_mask = 8
 script = ExtResource("1_vrtst")
 
-[node name="Segment1" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(-5, -5)
-
-[node name="Segment2" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(-289, -168)
-rotation = 1.0472
-
-[node name="Segment3" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(-290, -500)
-rotation = 2.0944
-
-[node name="Segment4" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(281, -173)
-rotation = -1.0472
-
-[node name="Segment5" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(-6, -664)
-rotation = 3.14159
-
-[node name="Segment6" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(280, -501)
-rotation = 4.18879
-
-[node name="CollisionPolygon2D" parent="Segment6/EnemySegment" index="1"]
-polygon = PackedVector2Array(60, 103.923, -60, 103.923, -120, -1.04907e-05, -60, -103.923, 60, -103.923, 120, -3.6239e-05)
-
-[node name="CollisionPolygon2D" parent="Segment6/EnemySegment3" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="CollisionPolygon2D" parent="Segment6/EnemySegment5" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
 [node name="EnemySegment2" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(184, -340)
+position = Vector2(187, -1.00008)
 rotation = 0.523599
 
 [node name="TexturedPoly" parent="EnemySegment2" index="0"]
@@ -54,7 +22,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [node name="EnemySegment3" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-98, -171)
+position = Vector2(-95, 168)
 rotation = 0.523599
 
 [node name="TexturedPoly" parent="EnemySegment3" index="0"]
@@ -66,7 +34,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [node name="EnemySegment4" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-193, -334)
+position = Vector2(-190, 4.99992)
 rotation = 1.5708
 
 [node name="TexturedPoly" parent="EnemySegment4" index="0"]
@@ -78,7 +46,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [node name="EnemySegment5" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-101, -497)
+position = Vector2(-98, -158)
 rotation = 2.61799
 
 [node name="TexturedPoly" parent="EnemySegment5" index="0"]
@@ -90,7 +58,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [node name="EnemySegment6" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(88, -499)
+position = Vector2(91, -160)
 rotation = 3.66519
 
 [node name="TexturedPoly" parent="EnemySegment6" index="0"]
@@ -102,7 +70,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [node name="EnemySegment7" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(93, -174)
+position = Vector2(96, 165)
 rotation = -0.523599
 
 [node name="TexturedPoly" parent="EnemySegment7" index="0"]
@@ -114,7 +82,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [node name="EnemySegment8" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-144, -251)
+position = Vector2(-141, 87.9999)
 rotation = -0.523599
 
 [node name="TexturedPoly" parent="EnemySegment8" index="0"]
@@ -126,7 +94,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
 [node name="EnemySegment9" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(136, -415)
+position = Vector2(139, -76.0001)
 rotation = -0.523599
 
 [node name="TexturedPoly" parent="EnemySegment9" index="0"]
@@ -138,7 +106,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
 [node name="EnemySegment10" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-3, -174)
+position = Vector2(0, 165)
 
 [node name="TexturedPoly" parent="EnemySegment10" index="0"]
 UsePolyHelper = true
@@ -149,7 +117,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
 [node name="EnemySegment11" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-5, -498)
+position = Vector2(-2, -159)
 
 [node name="TexturedPoly" parent="EnemySegment11" index="0"]
 UsePolyHelper = true
@@ -160,7 +128,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
 [node name="EnemySegment12" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(140, -256)
+position = Vector2(144, 83.9999)
 rotation = 0.523599
 
 [node name="TexturedPoly" parent="EnemySegment12" index="0"]
@@ -172,7 +140,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
 [node name="EnemySegment13" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-150, -414)
+position = Vector2(-147, -75.0001)
 rotation = 0.523599
 
 [node name="TexturedPoly" parent="EnemySegment13" index="0"]
@@ -184,7 +152,7 @@ SideLength = 120.0
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
 [node name="EnemySegment14" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-4, -338)
+position = Vector2(-1, 0.999924)
 
 [node name="TexturedPoly" parent="EnemySegment14" index="0"]
 position = Vector2(0, -1)
@@ -195,10 +163,6 @@ SideLength = 120.0
 [node name="CollisionPolygon2D" parent="EnemySegment14" index="1"]
 polygon = PackedVector2Array(60, 103.923, -60, 103.923, -120, -1.04907e-05, -60, -103.923, 60, -103.923, 120, -3.6239e-05)
 
-[editable path="Segment6"]
-[editable path="Segment6/EnemySegment"]
-[editable path="Segment6/EnemySegment3"]
-[editable path="Segment6/EnemySegment5"]
 [editable path="EnemySegment2"]
 [editable path="EnemySegment3"]
 [editable path="EnemySegment4"]

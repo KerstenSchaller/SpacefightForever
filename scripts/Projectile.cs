@@ -39,9 +39,13 @@ public partial class Projectile : CharacterBody2D
 				aliveCounter = maxLifeTicks - 10;
 
 				// damage enemys
-				var collider = (CharacterBody2D)collision.GetCollider();
+				var collider = (Node2D)collision.GetCollider();
+				GD.Print("Bullet hitting");
+				GD.Print(collider.GetGroups());
+				
 				if(collider.IsInGroup("enemy"))
 				{
+					GD.Print("Bullet causing damage");
 					((EnemySegment)collider).takeDamage(damage);
 				}
 			}

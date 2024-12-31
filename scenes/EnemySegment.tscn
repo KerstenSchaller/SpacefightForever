@@ -3,9 +3,7 @@
 [ext_resource type="Script" path="res://scripts/EnemySegment.cs" id="1_ldbeg"]
 [ext_resource type="Script" path="res://scripts/TexturedPolygon2D.cs" id="2_pvvh7"]
 
-[node name="EnemySegment" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 12
-collision_mask = 12
+[node name="EnemySegment" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_ldbeg")
 
 [node name="TexturedPoly" type="Node2D" parent="."]

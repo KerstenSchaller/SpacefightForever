@@ -8,20 +8,23 @@ public partial class Enemy : CharacterBody2D
 	public override void _Ready()
 	{
 		base._Ready();
-		//getCollisionShapesfromChildren(GetChildren());
+		getCollisionShapesfromChildren(GetChildren());
 	}
 
 	void getCollisionShapesfromChildren(Godot.Collections.Array<Node> children)
 	{
 		foreach(var child in children)
 		{
-			if(child is CollisionPolygon2D)
+			if(child is EnemySegment)
 			{
-				GD.Print("Adding child CollisionPolygon2D");
-				AddChild((CollisionPolygon2D)child);
+				//GD.Print("Adding child CollisionPolygon2D");
+				var poly = ((EnemySegment)child).CollisionPolygon;
+				child.RemoveChild(poly);
+				AddChild(poly);
 			}
 			else
 			{
+				GD.Print("Not EnemySegment");
 				getCollisionShapesfromChildren(child.GetChildren());
 			}
 		}

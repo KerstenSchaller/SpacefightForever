@@ -112,7 +112,7 @@ public partial class TexturedPolygon2D : Node2D
 		if (Engine.IsEditorHint())
 		{
 			// Code to execute when in editor.
-			DrawPolygon(this.Polygon, new Color[] { Colors.DarkRed });
+			DrawPolygon(this.Polygon, new Color[] { Colors.DarkGreen });
 		}
 		else
 		{

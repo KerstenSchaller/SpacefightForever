@@ -21,6 +21,7 @@ NumberOfVertices = 8
 SideLength = 31.0
 
 [node name="CollisionPolygon2D" parent="EnemySegment" index="1"]
+position = Vector2(0, -1)
 polygon = PackedVector2Array(15.5, 37.4203, -15.5, 37.4203, -37.4203, 15.5, -37.4203, -15.5, -15.5, -37.4203, 15.5, -37.4203, 37.4203, -15.5, 37.4203, 15.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
