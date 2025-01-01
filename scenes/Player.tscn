@@ -2,18 +2,17 @@
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_26r2p"]
 [ext_resource type="PackedScene" uid="uid://xcqvd6nboeum" path="res://scenes/OrbitWeaponHolder.tscn" id="3_h17xm"]
-[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="3_oj6l7"]
+[ext_resource type="PackedScene" uid="uid://d2sav1v8flyuo" path="res://scenes/EnemySegment.tscn" id="3_oj6l7"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.cs" id="5_vhcs8"]
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 12
-collision_mask = 12
 script = ExtResource("1_26r2p")
 
 [node name="OrbitWeaponHolder" parent="." instance=ExtResource("3_h17xm")]
 
 [node name="EnemySegment" parent="." instance=ExtResource("3_oj6l7")]
 position = Vector2(0, -1)
+script = null
 
 [node name="TexturedPoly" parent="EnemySegment" index="0"]
 UsePolyHelper = true

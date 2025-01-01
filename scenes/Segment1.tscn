@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://da2p8462s2jy7"]
+[gd_scene load_steps=3 format=3 uid="uid://da2p8462s2jy7"]
 
-[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="1_vrqrq"]
+[ext_resource type="Script" path="res://scripts/CompositSegment.cs" id="1_7drf2"]
+[ext_resource type="PackedScene" uid="uid://d2sav1v8flyuo" path="res://scenes/EnemySegment.tscn" id="2_vp82m"]
 
 [node name="Segment1" type="Node2D"]
+script = ExtResource("1_7drf2")
 
-[node name="EnemySegment" parent="." instance=ExtResource("1_vrqrq")]
-collision_mask = 12
+[node name="EnemySegment" parent="." instance=ExtResource("2_vp82m")]
 
 [node name="TexturedPoly" parent="EnemySegment" index="0"]
 UsePolyHelper = true
@@ -13,13 +14,11 @@ NumberOfVertices = 6
 SideLength = 120.0
 
 [node name="CollisionPolygon2D" parent="EnemySegment" index="1"]
-visible = false
 polygon = PackedVector2Array(60, 103.923, -60, 103.923, -120, -1.04907e-05, -60, -103.923, 60, -103.923, 120, -3.6239e-05)
 
-[node name="EnemySegment3" parent="." instance=ExtResource("1_vrqrq")]
+[node name="EnemySegment3" parent="." instance=ExtResource("2_vp82m")]
 position = Vector2(-143, -82)
 rotation = 2.09439
-collision_mask = 12
 
 [node name="TexturedPoly" parent="EnemySegment3" index="0"]
 UsePolyHelper = true
@@ -27,14 +26,11 @@ NumberOfVertices = 4
 SideLength = 120.0
 
 [node name="CollisionPolygon2D" parent="EnemySegment3" index="1"]
-visible = false
-position = Vector2(0, -1)
 polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
 
-[node name="EnemySegment5" parent="." instance=ExtResource("1_vrqrq")]
+[node name="EnemySegment5" parent="." instance=ExtResource("2_vp82m")]
 position = Vector2(-191, 3)
 rotation = 1.57429
-collision_mask = 12
 
 [node name="TexturedPoly" parent="EnemySegment5" index="0"]
 UsePolyHelper = true
@@ -42,7 +38,6 @@ NumberOfVertices = 3
 SideLength = 120.0
 
 [node name="CollisionPolygon2D" parent="EnemySegment5" index="1"]
-position = Vector2(0, -1)
 polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
 
 [editable path="EnemySegment"]

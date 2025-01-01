@@ -9,13 +9,12 @@ public partial class TexturedPolygon2D : Node2D
 {
 	public WaveFunctionCollapseComponent _WaveFunctionCollapseComponent { get; set; }
 
-
-
 	[Export]
 	public Polygon2D polygon2D { get; set; }
 
 	[Export]
 	public bool UsePolyHelper { get; set; }
+	
 	[Export]
 	public int NumberOfVertices { get; set; }
 
@@ -112,7 +111,7 @@ public partial class TexturedPolygon2D : Node2D
 		if (Engine.IsEditorHint())
 		{
 			// Code to execute when in editor.
-			DrawPolygon(this.Polygon, new Color[] { Colors.DarkRed });
+			//DrawPolygon(this.Polygon, new Color[] { Colors.DarkGreen });
 		}
 		else
 		{

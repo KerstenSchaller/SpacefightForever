@@ -5,35 +5,16 @@ using System.Linq;
 public partial class Player : CharacterBody2D
 {
 
-/*
-	[Export(PropertyHint.Range, "0,90,5")]
-	public float ShootingFOV
-	{
-		get => shootingFOVDeg;
-		set => shootingFOVDeg = value;
-	}
-*/
-
-
-
-
 	OrbitWeaponHolder weapon;
 
 	public override void _Ready()
 	{
 		weapon = GetNode<OrbitWeaponHolder>("OrbitWeaponHolder");
-
-
-
+		DuplicateCollisionPolygons(this,Transform2D.Identity);
 		//weapon.ShootingFOVDegree = shootingFOVDeg;
 	}
 
 	int speed = 300;
-
-
-
-
-
 
 	Vector2 originPos;
 	bool originSet = false;
@@ -49,6 +30,42 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
+	public void DuplicateCollisionPolygons(Node parentNode, Transform2D accumulatedTransform)
+	{
+		foreach (Node child in parentNode.GetChildren())
+		{
+			if (child is CollisionPolygon2D collisionPolygon)
+			{
+				// Calculate the cumulative transform for this node
+				Transform2D localTransform = collisionPolygon.Transform; // Local transform of this node
+				Transform2D totalTransform = accumulatedTransform * localTransform;
+
+				// Duplicate the CollisionPolygon2D
+				CollisionPolygon2D duplicatedPolygon = (CollisionPolygon2D)collisionPolygon.Duplicate();
+
+				// Apply the manually accumulated transform
+				duplicatedPolygon.Position = totalTransform.Origin;
+				duplicatedPolygon.Rotation = totalTransform.Rotation;
+
+				// Add the duplicated node to the parent of the original
+				this.AddChild(duplicatedPolygon);
+			}
+			else if (child is Node2D node2D)
+			{
+				// If the child is a Node2D, accumulate its transformation
+				Transform2D localTransform = node2D.Transform; // Local transform of this Node2D
+				Transform2D totalTransform = accumulatedTransform * localTransform;
+
+				// Recurse into this child with the updated transform
+				DuplicateCollisionPolygons(child, totalTransform);
+			}
+			else
+			{
+				// If it's not a Node2D or CollisionPolygon2D, simply recurse with the same transform
+				DuplicateCollisionPolygons(child, accumulatedTransform);
+			}
+		}
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{

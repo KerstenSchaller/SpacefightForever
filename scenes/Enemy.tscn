@@ -1,214 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx5hgk5ergaru"]
+[gd_scene load_steps=3 format=3 uid="uid://dx5hgk5ergaru"]
 
-[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_vrtst"]
-[ext_resource type="PackedScene" uid="uid://da2p8462s2jy7" path="res://scenes/Segment1.tscn" id="4_brgrn"]
-[ext_resource type="PackedScene" uid="uid://baggpejjc0spg" path="res://scenes/EnemySegment.tscn" id="4_rpq3m"]
+[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_dogk1"]
+[ext_resource type="PackedScene" uid="uid://da2p8462s2jy7" path="res://scenes/Segment1.tscn" id="2_t3hp8"]
 
-[node name="Enemy" type="CharacterBody2D"]
-collision_layer = 12
-collision_mask = 8
-script = ExtResource("1_vrtst")
+[node name="Enemy2" type="CharacterBody2D"]
+position = Vector2(4, 339)
+script = ExtResource("1_dogk1")
 
-[node name="Segment1" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(-5, -5)
+[node name="Segment1" parent="." instance=ExtResource("2_t3hp8")]
+position = Vector2(-2, -6)
 
-[node name="Segment2" parent="." instance=ExtResource("4_brgrn")]
+[node name="Segment2" parent="." instance=ExtResource("2_t3hp8")]
 position = Vector2(-289, -168)
 rotation = 1.0472
 
-[node name="Segment3" parent="." instance=ExtResource("4_brgrn")]
+[node name="Segment3" parent="." instance=ExtResource("2_t3hp8")]
 position = Vector2(-290, -500)
 rotation = 2.0944
 
-[node name="Segment4" parent="." instance=ExtResource("4_brgrn")]
-position = Vector2(281, -173)
+[node name="Segment4" parent="." instance=ExtResource("2_t3hp8")]
+position = Vector2(280, -173)
 rotation = -1.0472
 
-[node name="Segment5" parent="." instance=ExtResource("4_brgrn")]
+[node name="Segment5" parent="." instance=ExtResource("2_t3hp8")]
 position = Vector2(-6, -664)
 rotation = 3.14159
 
-[node name="Segment6" parent="." instance=ExtResource("4_brgrn")]
+[node name="Segment6" parent="." instance=ExtResource("2_t3hp8")]
 position = Vector2(280, -501)
 rotation = 4.18879
 
-[node name="CollisionPolygon2D" parent="Segment6/EnemySegment" index="1"]
-polygon = PackedVector2Array(60, 103.923, -60, 103.923, -120, -1.04907e-05, -60, -103.923, 60, -103.923, 120, -3.6239e-05)
-
-[node name="CollisionPolygon2D" parent="Segment6/EnemySegment3" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="CollisionPolygon2D" parent="Segment6/EnemySegment5" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment2" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(184, -340)
-rotation = 0.523599
-
-[node name="TexturedPoly" parent="EnemySegment2" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 3
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment2" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment3" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-98, -171)
-rotation = 0.523599
-
-[node name="TexturedPoly" parent="EnemySegment3" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 3
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment3" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment4" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-193, -334)
-rotation = 1.5708
-
-[node name="TexturedPoly" parent="EnemySegment4" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 3
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment4" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment5" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-101, -497)
-rotation = 2.61799
-
-[node name="TexturedPoly" parent="EnemySegment5" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 3
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment5" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment6" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(88, -499)
-rotation = 3.66519
-
-[node name="TexturedPoly" parent="EnemySegment6" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 3
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment6" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment7" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(93, -174)
-rotation = -0.523599
-
-[node name="TexturedPoly" parent="EnemySegment7" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 3
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment7" index="1"]
-polygon = PackedVector2Array(60, 34.641, -60, 34.641, 8.2618e-07, -69.282)
-
-[node name="EnemySegment8" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-144, -251)
-rotation = -0.523599
-
-[node name="TexturedPoly" parent="EnemySegment8" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 4
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment8" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="EnemySegment9" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(136, -415)
-rotation = -0.523599
-
-[node name="TexturedPoly" parent="EnemySegment9" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 4
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment9" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="EnemySegment10" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-3, -174)
-
-[node name="TexturedPoly" parent="EnemySegment10" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 4
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment10" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="EnemySegment11" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-5, -498)
-
-[node name="TexturedPoly" parent="EnemySegment11" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 4
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment11" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="EnemySegment12" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(140, -256)
-rotation = 0.523599
-
-[node name="TexturedPoly" parent="EnemySegment12" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 4
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment12" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="EnemySegment13" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-150, -414)
-rotation = 0.523599
-
-[node name="TexturedPoly" parent="EnemySegment13" index="0"]
-UsePolyHelper = true
-NumberOfVertices = 4
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment13" index="1"]
-polygon = PackedVector2Array(60, 60, -60, 60, -60, -60, 60, -60)
-
-[node name="EnemySegment14" parent="." instance=ExtResource("4_rpq3m")]
-position = Vector2(-4, -338)
-
-[node name="TexturedPoly" parent="EnemySegment14" index="0"]
-position = Vector2(0, -1)
-UsePolyHelper = true
-NumberOfVertices = 6
-SideLength = 120.0
-
-[node name="CollisionPolygon2D" parent="EnemySegment14" index="1"]
-polygon = PackedVector2Array(60, 103.923, -60, 103.923, -120, -1.04907e-05, -60, -103.923, 60, -103.923, 120, -3.6239e-05)
-
-[editable path="Segment6"]
-[editable path="Segment6/EnemySegment"]
-[editable path="Segment6/EnemySegment3"]
-[editable path="Segment6/EnemySegment5"]
-[editable path="EnemySegment2"]
-[editable path="EnemySegment3"]
-[editable path="EnemySegment4"]
-[editable path="EnemySegment5"]
-[editable path="EnemySegment6"]
-[editable path="EnemySegment7"]
-[editable path="EnemySegment8"]
-[editable path="EnemySegment9"]
-[editable path="EnemySegment10"]
-[editable path="EnemySegment11"]
-[editable path="EnemySegment12"]
-[editable path="EnemySegment13"]
-[editable path="EnemySegment14"]
+[editable path="Segment1"]
+[editable path="Segment1/EnemySegment"]
+[editable path="Segment1/EnemySegment3"]
+[editable path="Segment1/EnemySegment5"]

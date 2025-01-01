@@ -39,10 +39,10 @@ public partial class Projectile : CharacterBody2D
 				aliveCounter = maxLifeTicks - 10;
 
 				// damage enemys
-				var collider = (CharacterBody2D)collision.GetCollider();
-				if(collider.IsInGroup("enemy"))
+				var collider = collision.GetCollider();
+				if(collider is IDamagable)
 				{
-					((EnemySegment)collider).takeDamage(damage);
+					((IDamagable)collider).takeDamage(damage, ((CollisionPolygon2DWithID)collision.GetColliderShape()).getId());
 				}
 			}
 		}

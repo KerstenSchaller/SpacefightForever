@@ -21,12 +21,15 @@ position = Vector2(4, 8)
 Enabled = true
 
 [node name="Enemy" parent="." instance=ExtResource("2_f428f")]
-position = Vector2(1413, 637)
+position = Vector2(1292, 721)
 
 [node name="Player" parent="." instance=ExtResource("3_nmuai")]
-position = Vector2(2018, 407)
+position = Vector2(550, 135)
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
 tile_set = SubResource("TileSet_p8vdg")
 format = 2
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1242, 747)
